@@ -10,6 +10,7 @@
     "@types/node": "^16.18.108",
     "@types/react": "^18.3.6",
     "@types/react-dom": "^18.3.0",
+    "mobx": "^6.13.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-scripts": "5.0.1",
@@ -18,13 +19,13 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "code:format": "prettier --write .",
+    "code:format": "prettier --ignore-path .gitignore --write \"**/*.{ts,tsx,js,css,scss,html,json}\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint .",
+    "lint": "eslint --fix .",
     "lint:fix": "eslint --fix",
-    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "format": "npm run code:format && npm run lint",
     "prepare": "husky"
   },
   "eslintConfig": {
