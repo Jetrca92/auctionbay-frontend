@@ -1,7 +1,9 @@
-import './App.css'
+import { FC } from 'react'
+import Routes from 'routes/Routes'
+import { observer } from 'mobx-react'
 
-function App() {
-  return <div></div>
+const App: FC = () => {
+  return <Routes />
 }
 
-export default App
+export default observer(App)
