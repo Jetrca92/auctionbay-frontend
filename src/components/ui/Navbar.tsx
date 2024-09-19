@@ -1,6 +1,8 @@
 import { FC } from 'react'
-import styles from 'styles/css/navbar/Navbar.module.scss'
+import styles from 'styles/scss/Navbar.module.scss'
 import logoImg from 'styles/images/logo.svg'
+import { Link } from 'react-router-dom'
+import { routes } from 'constants/routesConstants'
 const Navbar: FC = () => {
   return (
     <>
@@ -9,8 +11,13 @@ const Navbar: FC = () => {
           <img src={logoImg} alt="logo" />
         </div>
         <div className={styles.signupDiv}>
-          <b>Log in</b> or{' '}
-          <button className={styles.signupButton}>Sign up</button>
+          <Link className="nav-link" to={routes.LOGIN}>
+            <b>Log in</b>
+          </Link>{' '}
+          or
+          <Link className={styles.signupButton} to={routes.SIGNUP}>
+            Sign up
+          </Link>
         </div>
       </div>
     </>

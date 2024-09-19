@@ -1,0 +1,25 @@
+@import '../fonts/fonts.css';
+
+$font-family-base: 'Inter';
+
+html {
+  background: var(--Background-1, #f6f6f4);
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 16px;
+  padding: 8px 16px;
+  border: none;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #071015;
+}

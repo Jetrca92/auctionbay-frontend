@@ -14,20 +14,18 @@
 }
 
 .signupButton {
-  background: var(--Gray-50, #272d2d);
-  width: 92px;
-  height: 40px;
-  padding: 8px 16px;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 8px;
   border-radius: 16px;
+  border: none;
+  background: var(--Gray-50, #272d2d);
+  width: 92px;
+  height: 40px;
   font-size: 16px;
   font-weight: 500;
   color: #ffffff;
-  line-height: 24px;
-  text-align: left;
+  text-decoration: none;
 }
 
 .signupDiv {
@@ -40,4 +38,5 @@
   font-size: 16px;
   line-height: 24px;
   text-align: left;
+  text-decoration: none;
 }
