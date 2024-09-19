@@ -1,8 +1,10 @@
+import Navbar from 'components/ui/Navbar'
 import { FC } from 'react'
 
 const Home: FC = () => {
   return (
     <div className="p-2 mb-4">
+      <Navbar />
       <div className="container-fluid py-4">
         <h1 className="display-5 fw-bold">Welcome</h1>
         <p className="col-md-8 fs-4">

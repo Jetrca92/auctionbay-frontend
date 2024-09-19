@@ -1,0 +1,43 @@
+.navbar {
+  //width: 1440px;
+  height: 104px;
+  padding: 20px 32px;
+  display: flex;
+  justify-content: space-between;
+  gap: 0px;
+}
+
+.logoDiv {
+  width: 64px;
+  height: 64px;
+  display: flex;
+}
+
+.signupButton {
+  background: var(--Gray-50, #272d2d);
+  width: 92px;
+  height: 40px;
+  padding: 8px 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border-radius: 16px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #ffffff;
+  line-height: 24px;
+  text-align: left;
+}
+
+.signupDiv {
+  width: 172px;
+  height: 40px;
+  gap: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: left;
+}
