@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import { observer } from 'mobx-react'
-import styles from 'styles/scss/Register.module.scss'
+import styles from 'styles/scss/Authentication.module.scss'
 
 const RegisterForm: FC = () => {
   return (

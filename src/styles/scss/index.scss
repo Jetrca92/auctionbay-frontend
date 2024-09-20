@@ -4,10 +4,13 @@ $font-family-base: 'Inter';
 
 html {
   background: var(--Background-1, #f6f6f4);
+  width: 1440px;
+  height: 1024px;
 }
 
 body {
   font-family: 'Inter', sans-serif;
+  margin: 0px;
 }
 
 button {

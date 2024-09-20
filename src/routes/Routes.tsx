@@ -29,7 +29,7 @@ const Page404 = lazy(() => import('pages/Page404'))
 export const AppRoutes: AppRoute[] = [
   // Restricted Routes
   {
-    type: RouteType.RESTRICTED,
+    type: RouteType.PUBLIC,
     path: '/login',
     children: <Login />,
   },
@@ -42,6 +42,11 @@ export const AppRoutes: AppRoute[] = [
   {
     type: RouteType.PUBLIC,
     path: '/',
+    children: <LandingPage />,
+  },
+  {
+    type: RouteType.PUBLIC,
+    path: '/forgot-password',
     children: <LandingPage />,
   },
 ]

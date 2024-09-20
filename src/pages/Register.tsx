@@ -1,18 +1,19 @@
-import styles from 'styles/scss/Register.module.scss'
+import styles from 'styles/scss/Authentication.module.scss'
 import RegisterForm from 'components/user/RegisterForm'
 import { FC } from 'react'
-import registerImg from 'styles/images/register_img.png'
+
 import logo from 'styles/images/logo.svg'
 import { Link } from 'react-router-dom'
 import { routes } from 'constants/routesConstants'
+import AuthImgLeft from 'components/user/AuthImgLeft'
 
 const Register: FC = () => {
   return (
-    <div className={styles.registerPage}>
-      <img src={registerImg} className={styles.registerImage} alt="auctions" />
-      <div className={styles.registerDiv}>
+    <div className={styles.authPage}>
+      <AuthImgLeft />
+      <div className={styles.innerDiv}>
         <div className={styles.rightSide}>
-          <div className={styles.registerContainer}>
+          <div className={styles.authContainer}>
             <div className={styles.logo}>
               <img src={logo} alt="logo" />
             </div>
