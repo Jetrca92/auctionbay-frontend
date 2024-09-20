@@ -34,7 +34,7 @@ export const AppRoutes: AppRoute[] = [
     children: <Login />,
   },
   {
-    type: RouteType.RESTRICTED,
+    type: RouteType.PUBLIC,
     path: '/signup',
     children: <Register />,
   },

@@ -1,13 +1,12 @@
 import Hero from 'components/LandingPage.tsx/Hero'
-import Navbar from 'components/ui/Navbar'
+import Layout from 'components/ui/Layout'
 import { FC } from 'react'
 
 const Home: FC = () => {
   return (
-    <div className="p-2 mb-4">
-      <Navbar />
+    <Layout>
       <Hero />
-    </div>
+    </Layout>
   )
 }
 
