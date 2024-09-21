@@ -48,7 +48,11 @@ const LoginForm: FC = () => {
             </div>
 
             <div className={styles.forgotPasswordText}>
-              <Link to={routes.FORGOT_PASSWORD} className="nav-link">
+              <Link
+                to={routes.FORGOT_PASSWORD}
+                className="nav-link"
+                style={{ color: '#74817F' }}
+              >
                 Forgot password?
               </Link>
             </div>
