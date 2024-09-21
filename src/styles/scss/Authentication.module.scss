@@ -157,6 +157,7 @@
   font-size: 12px;
   font-weight: 300;
   line-height: 16px;
+  color: #74817f;
 }
 
 .passwordFormContainer {
@@ -177,6 +178,11 @@
   width: 347px;
   height: 70px;
   gap: 8px;
+}
+
+.passwordFormSubtitle {
+  font-size: 15px;
+  font-weight: 300;
 }
 
 .passwordFormBody {

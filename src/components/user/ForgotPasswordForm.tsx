@@ -11,7 +11,9 @@ const ForgotPasswordForm: FC = () => {
       <div className={styles.passwordFormContainer}>
         <div className={styles.passwordFormTitle}>
           <h1>Forgot password?</h1>
-          <div>No worries, we will send you reset instructions</div>
+          <div className={styles.passwordFormSubtitle}>
+            No worries, we will send you reset insturctions
+          </div>
         </div>
 
         <form
