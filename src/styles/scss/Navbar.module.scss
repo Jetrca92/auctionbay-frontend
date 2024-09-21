@@ -1,5 +1,5 @@
 .navbar {
-  //width: 1440px;
+  width: 1440px;
   height: 104px;
   padding: 20px 32px;
   display: flex;
@@ -39,4 +39,93 @@
   line-height: 24px;
   text-align: left;
   text-decoration: none;
+}
+
+.leftNavigation {
+  display: flex;
+  gap: 32px;
+}
+
+.navigationTab {
+  display: flex;
+  width: 243px;
+  height: 56px;
+  padding: 4px;
+  gap: 8px;
+  border-radius: 32px;
+  background: #ffffff;
+}
+
+.leftTab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 92px;
+  height: 40px;
+  padding: 8px 16px;
+  gap: 4px;
+  border-radius: 32px;
+}
+
+.leftTabLabel {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 19.2px;
+}
+
+.rightTabLabel {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 19.2px;
+  color: #ffffff;
+}
+
+.rightTab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 77px;
+  height: 40px;
+  padding: 8px 16px;
+  gap: 4px;
+  border-radius: 32px;
+  background: #272d2d;
+}
+
+.navIcon {
+  height: 24px;
+  width: 24px;
+}
+
+.rightNavigation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 184px;
+  height: 56px;
+  padding: 4px;
+  gap: 8px;
+  border-radius: 32px;
+  background-color: #ffffff;
+}
+
+.ctaButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+  padding: 16px;
+  gap: 4px;
+  border-radius: 32px;
+}
+
+.ctaButton1 {
+  @extend .ctaButton;
+  background: #edf4f2;
+}
+
+.ctaButton2 {
+  @extend .ctaButton;
+  background: #f4ff47;
 }

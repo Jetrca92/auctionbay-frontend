@@ -6,6 +6,7 @@ import RestrictedRoute from './RestrictedRoute'
 import Login from 'pages/Login'
 import Register from 'pages/Register'
 import ForgotPassword from 'pages/ForgotPassword'
+import Profile from 'pages/Profile'
 
 export enum RouteType {
   PUBLIC,
@@ -49,6 +50,12 @@ export const AppRoutes: AppRoute[] = [
     type: RouteType.PUBLIC,
     path: '/forgot-password',
     children: <ForgotPassword />,
+  },
+  // Private Routes
+  {
+    type: RouteType.PUBLIC,
+    path: '/profile',
+    children: <Profile />,
   },
 ]
 
