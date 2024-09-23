@@ -1,9 +1,13 @@
 import { routes } from 'constants/routesConstants'
-import { FC } from 'react'
+import { FC, ReactNode } from 'react'
 import { Link } from 'react-router-dom'
-import styles from 'styles/scss/ProfilePage.module.scss'
+import styles from 'styles/scss/ProfilePageLayout.module.scss'
 
-const Content: FC = () => {
+interface Props {
+  children: ReactNode | ReactNode[]
+}
+
+const Content: FC<Props> = ({ children }) => {
   return (
     <div className={styles.content}>
       <div className={styles.tabBar}>
@@ -19,7 +23,7 @@ const Content: FC = () => {
           </Link>
         </div>
       </div>
-      <div className={styles.tabContent}></div>
+      {children}
     </div>
   )
 }

@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import styles from 'styles/scss/ProfilePage.module.scss'
+import styles from 'styles/scss/ProfilePageLayout.module.scss'
 
 const DashboardStatistics: FC = () => {
   return (
