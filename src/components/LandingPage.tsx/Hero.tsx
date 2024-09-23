@@ -3,6 +3,7 @@ import styles from 'styles/scss/LandingPage.module.scss'
 import heroImg from '../../styles/images/auctions_landing.png'
 import { Link } from 'react-router-dom'
 import { routes } from 'constants/routesConstants'
+
 const Hero: FC = () => {
   return (
     <>

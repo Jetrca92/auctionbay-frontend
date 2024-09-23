@@ -1,0 +1,85 @@
+* {
+  box-sizing: border-box;
+}
+
+.profilePage {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.title {
+  width: 1, 440px;
+  height: 38px;
+  padding: 0px 32px;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.titleText {
+  margin: 0px;
+}
+
+.dashboardStatistics {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 1, 440px;
+  height: 202px;
+  padding: 0px 32px 0px 32px;
+  gap: 16px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 332px;
+  height: 202px;
+  padding: 16px;
+  gap: 0px;
+  border-radius: 16px;
+}
+
+.cardDarkBg {
+  @extend .card;
+  color: #f4ff47;
+  background: #272d2d;
+}
+
+.cardWhiteBg {
+  color: #071015;
+  @extend .card;
+  background: #ffffff;
+}
+
+.titleFrame {
+  width: 300px;
+  height: 48px;
+}
+
+.cardSubtitle {
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 24px;
+}
+
+.cardSubtitleYellow {
+  @extend .cardSubtitle;
+  color: #f4ff47;
+}
+
+.cardSubtitleGray {
+  @extend .cardSubtitle;
+}
+
+.cardData {
+  font-size: 80px;
+  font-weight: 700;
+  line-height: 80px;
+}
+
+.cardDataGreen {
+  @extend .cardData;
+  color: #adff90;
+}
