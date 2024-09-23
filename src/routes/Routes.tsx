@@ -57,6 +57,16 @@ export const AppRoutes: AppRoute[] = [
     path: '/profile',
     children: <Profile />,
   },
+  {
+    type: RouteType.PUBLIC,
+    path: '/profile-bidding',
+    children: <Profile />,
+  },
+  {
+    type: RouteType.PUBLIC,
+    path: '/profile-won',
+    children: <Profile />,
+  },
 ]
 
 const Routes: FC = () => {

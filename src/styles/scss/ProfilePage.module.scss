@@ -83,3 +83,54 @@
   @extend .cardData;
   color: #adff90;
 }
+
+.content {
+  display: flex;
+  flex-direction: column;
+  width: 1, 440px;
+  height: 632px;
+  gap: 16px;
+}
+
+.tabBar {
+  width: 1, 440px;
+  height: 48px;
+  padding: 0px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tabContainer {
+  display: flex;
+  width: 402px;
+  height: 48px;
+  padding: 4px;
+  gap: 8px;
+  border-radius: 16px;
+  background: var(--Gray-10, #edf4f2);
+}
+
+.tab {
+  width: 126px;
+  height: H40px;
+  padding: 8px 16px;
+  gap: 8px;
+  border-radius: 16px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  text-decoration: none;
+}
+
+.tabDark {
+  @extend .tab;
+  background: #272d2d;
+  color: #ffffff;
+}
+
+.tabGrey {
+  @extend .tab;
+  background: #edf4f2;
+  color: #071015;
+}
