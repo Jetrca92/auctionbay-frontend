@@ -2,7 +2,15 @@ import { FC } from 'react'
 import styles from 'styles/scss/MyAuctions.module.scss'
 import chair from 'styles/images/chair.png'
 
-const auctions = [
+type Auction = {
+  title: string
+  image: string
+  starting_price: number
+  duration?: number
+  is_done: boolean
+}
+
+const auctions: Auction[] = [
   {
     title: 'Old chair',
     image: chair,
@@ -12,6 +20,21 @@ const auctions = [
   },
 ]
 const WonComponent: FC = () => {
+  if (auctions.length === 0)
+    return (
+      <div className={styles.emptyContainer}>
+        <div className={styles.emptyStateWon}>
+          <div className={styles.captionTitle}>
+            <h3>Nothing here yet?</h3>
+          </div>
+          <div className={styles.caption}>
+            When you win auction items will be displayed here! Go on and bid on
+            your favorite items!
+          </div>
+        </div>
+      </div>
+    )
+
   return (
     <div className={styles.myAuctions}>
       {auctions.map((auction, index) => (

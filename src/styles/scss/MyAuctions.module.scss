@@ -186,3 +186,40 @@
   line-height: 24px;
   color: #ffffff;
 }
+
+.emptyContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1, 440px;
+  height: 568px;
+  padding: 0px 32px;
+  gap: 16px;
+}
+
+.emptyState {
+  width: 331px;
+  height: 111px;
+  gap: 8px;
+}
+
+.emptyStateWon {
+  @extend .emptyState;
+  width: 230px;
+}
+
+.emptyStateBidding {
+  width: 300px;
+}
+
+.captionTitle {
+  text-align: center;
+}
+
+.caption {
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 24px;
+  text-align: center;
+  color: #74817f;
+}

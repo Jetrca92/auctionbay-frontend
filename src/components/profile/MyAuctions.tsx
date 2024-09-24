@@ -6,22 +6,47 @@ import trash from 'styles/images/trash.png'
 import edit from 'styles/images/edit.png'
 import chair from 'styles/images/chair.png'
 
-const auctions = [
-  {
-    title: 'Microphone',
-    image: microphone,
-    starting_price: 123,
-    duration: 24,
-    is_active: true,
-  },
+type Auction = {
+  title: string
+  image: string
+  starting_price: number
+  duration?: number
+  is_active: boolean
+}
+
+const auctions: Auction[] = [
   {
     title: 'Old chair',
     image: chair,
     starting_price: 65,
+    duration: 24,
+    is_active: true,
+  },
+  {
+    title: 'Awesome microphone pro',
+    image: microphone,
+    starting_price: 65,
+    duration: 24,
     is_active: false,
   },
 ]
+
 const MyAuctions: FC = () => {
+  if (auctions.length === 0)
+    return (
+      <div className={styles.emptyContainer}>
+        <div className={styles.emptyState}>
+          <div className={styles.captionTitle}>
+            <h3>Oh no, no auctions added!</h3>
+          </div>
+          <div className={styles.caption}>
+            To add new auction click “+” button in navigation bar and new
+            auctions wil be added here!
+          </div>
+        </div>
+      </div>
+    )
+
   return (
     <div className={styles.myAuctions}>
       {auctions.map((auction, index) => (
