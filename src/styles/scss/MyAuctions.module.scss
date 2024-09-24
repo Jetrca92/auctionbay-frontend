@@ -59,7 +59,22 @@
 }
 
 .tagDone {
+  @extend .tag;
+  width: 33px;
   background: #272d2d;
+  color: #ffffff;
+}
+
+.tagWinning {
+  @extend .tag;
+  width: 46px;
+  background: #adff90;
+}
+
+.tagOutbid {
+  @extend .tag;
+  width: 40px;
+  background: #ffaa98;
 }
 
 .timeTag {
@@ -105,15 +120,26 @@
   display: flex;
   flex-direction: column;
   width: 216px;
-  height: 206px;
+  height: 150px;
   padding: 4px;
   gap: 8px;
+}
+
+.imageContainerFull {
+  @extend .imageContainer;
+  height: 206px;
 }
 
 .image {
   width: 208px;
   height: 150px;
   border-radius: 12px;
+  object-fit: cover;
+}
+
+.imageFull {
+  @extend .image;
+  height: 206px;
 }
 
 .editFrame {
