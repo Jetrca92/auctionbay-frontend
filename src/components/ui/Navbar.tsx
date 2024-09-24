@@ -17,7 +17,7 @@ const Navbar: FC = () => {
   const [activeTab, setActiveTab] = useState('')
 
   useEffect(() => {
-    if (location.pathname === routes.PROFILE) {
+    if (location.pathname.startsWith(routes.PROFILE)) {
       setActiveTab('profile')
     } else if (location.pathname === routes.AUCTIONS) {
       setActiveTab('auctions')

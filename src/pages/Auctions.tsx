@@ -1,3 +1,4 @@
+import AuctionsBody from 'components/auctions/AuctionsBody'
 import TitleComponent from 'components/auctions/TitleComponent'
 import Layout from 'components/ui/Layout'
 import { FC } from 'react'
@@ -7,6 +8,7 @@ const Auctions: FC = () => {
     <Layout>
       <div className={styles.auctionsBody}>
         <TitleComponent />
+        <AuctionsBody />
       </div>
     </Layout>
   )
