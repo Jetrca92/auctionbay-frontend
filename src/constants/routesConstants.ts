@@ -6,4 +6,5 @@ export enum routes {
   PROFILE = '/profile',
   BIDDING = '/profile-bidding',
   WON = '/profile-won',
+  AUCTIONS = '/auctions',
 }
