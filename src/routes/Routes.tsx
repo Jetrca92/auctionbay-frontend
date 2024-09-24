@@ -7,6 +7,8 @@ import Login from 'pages/Login'
 import Register from 'pages/Register'
 import ForgotPassword from 'pages/ForgotPassword'
 import Profile from 'pages/Profile'
+import Bidding from 'pages/Bidding'
+import Won from 'pages/Won'
 
 export enum RouteType {
   PUBLIC,
@@ -60,12 +62,12 @@ export const AppRoutes: AppRoute[] = [
   {
     type: RouteType.PUBLIC,
     path: '/profile-bidding',
-    children: <Profile />,
+    children: <Bidding />,
   },
   {
     type: RouteType.PUBLIC,
     path: '/profile-won',
-    children: <Profile />,
+    children: <Won />,
   },
 ]
 

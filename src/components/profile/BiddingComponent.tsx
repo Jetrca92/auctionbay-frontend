@@ -2,39 +2,38 @@ import { FC } from 'react'
 import styles from 'styles/scss/MyAuctions.module.scss'
 import timeIcon from 'styles/images/time.png'
 import microphone from 'styles/images/microphone.png'
-import trash from 'styles/images/trash.png'
-import edit from 'styles/images/edit.png'
 import chair from 'styles/images/chair.png'
 
 const auctions = [
   {
-    title: 'Microphone',
+    title: 'Old chair',
     image: microphone,
-    starting_price: 123,
+    starting_price: 65,
     duration: 24,
-    is_active: true,
+    is_winning: true,
   },
   {
     title: 'Old chair',
     image: chair,
     starting_price: 65,
-    is_active: false,
+    duration: 24,
+    is_winning: false,
   },
 ]
-const MyAuctions: FC = () => {
+const BiddingComponent: FC = () => {
   return (
     <div className={styles.myAuctions}>
       {auctions.map((auction, index) => (
-        <div className={styles.cardMyAuctions} key={index}>
+        <div className={styles.cardBidding} key={index}>
           <div className={styles.content}>
             <div className={styles.tagHeader}>
-              {auction.is_active ? (
-                <div className={styles.tagInProgress}>
-                  <div className={styles.tagText}>In progress</div>
+              {auction.is_winning ? (
+                <div className={styles.tagWinning}>
+                  <div className={styles.tagText}>Winning</div>
                 </div>
               ) : (
-                <div className={styles.tagDone}>
-                  <div className={styles.tagText}>Done</div>
+                <div className={styles.tagOutbid}>
+                  <div className={styles.tagText}>Outbid</div>
                 </div>
               )}
               {auction.duration && (
@@ -52,25 +51,12 @@ const MyAuctions: FC = () => {
             <div className={styles.price}>{auction.starting_price} €</div>
           </div>
 
-          <div
-            className={`${auction.is_active ? styles.imageContainer : styles.imageContainerFull}`}
-          >
+          <div className={styles.imageContainer}>
             <img
               src={auction.image}
               alt={auction.title}
-              className={`${auction.is_active ? styles.image : styles.imageFull}`}
+              className={styles.image}
             />
-            {auction.is_active && (
-              <div className={styles.editFrame}>
-                <button className={styles.deleteBtn}>
-                  <img src={trash} alt="trash-con" />
-                </button>
-                <button className={styles.editBtn}>
-                  <img src={edit} alt="edit" />
-                  <div className={styles.btnLabel}>Edit</div>
-                </button>
-              </div>
-            )}
           </div>
         </div>
       ))}
@@ -78,4 +64,4 @@ const MyAuctions: FC = () => {
   )
 }
 
-export default MyAuctions
+export default BiddingComponent

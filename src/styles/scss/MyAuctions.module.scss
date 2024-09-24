@@ -11,12 +11,21 @@
   gap: 16px;
 }
 
-.cardInProgress {
+.card {
   width: 216px;
-  height: 298px;
   gap: 0px;
   border-radius: 16px;
   background: #ffffff;
+}
+
+.cardMyAuctions {
+  @extend .card;
+  height: 298px;
+}
+
+.cardBidding {
+  @extend .card;
+  height: 250px;
 }
 
 .content {
