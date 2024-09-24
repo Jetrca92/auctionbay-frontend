@@ -2,6 +2,10 @@
 
 $font-family-base: 'Inter';
 
+* {
+  box-sizing: border-box;
+}
+
 html {
   background: var(--Background-1, #f6f6f4);
   width: 1440px;
@@ -34,7 +38,6 @@ h3 {
   font-size: 26px;
   font-weight: 700;
   line-height: 31.2px;
-  margin: 2px;
 }
 
 h4 {
