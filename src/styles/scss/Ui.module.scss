@@ -1,0 +1,39 @@
+.tag {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 16px;
+}
+
+.tagText {
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 24px;
+  color: #071015;
+}
+
+.tagTextSm {
+  font-size: 10px;
+  font-weight: 300;
+  line-height: 12px;
+}
+
+.timeTagContent {
+  display: flex;
+  gap: 4px;
+  justify-content: center;
+  align-items: center;
+}
+.timeIconContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20px;
+  height: 20px;
+}
+
+.timeIcon {
+  width: 16.67px;
+  height: 16.67px;
+  top: 1.66px;
+  left: 1.67px;
+}
