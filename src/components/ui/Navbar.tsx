@@ -9,8 +9,7 @@ import bellIcon from 'styles/images/bell.png'
 import addIcon from 'styles/images/add.png'
 import { Link, useLocation } from 'react-router-dom'
 import { routes } from 'constants/routesConstants'
-
-const isAuthenticated = true
+import authStore from 'stores/auth.store'
 
 const Navbar: FC = () => {
   const location = useLocation()
@@ -27,7 +26,7 @@ const Navbar: FC = () => {
   return (
     <>
       <div className={styles.navbar}>
-        {isAuthenticated ? (
+        {authStore.user ? (
           <>
             <div className={styles.leftNavigation}>
               <div className={styles.logoDiv}>
