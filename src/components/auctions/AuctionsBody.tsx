@@ -2,27 +2,31 @@ import { FC } from 'react'
 import styles from 'styles/scss/Auctions.module.scss'
 import AuctionCard from './AuctionCard'
 import { AuctionType } from 'models/auction'
-import chair from 'styles/images/chair.png'
-
-const auctions: AuctionType[] = [
-  {
-    id: '614bda32-bb0d-487c-b766-0eccce756b9c',
-    title: 'Vintage Chair',
-    image: chair,
-    description: 'This is a description for Vintage Chair auction.',
-    starting_price: '$100',
-    auction_duration_hrs: '24',
-    is_active: true,
-    owner: {
-      id: '123',
-      username: 'joza',
-    },
-    bids: [],
-  },
-]
+import * as API from 'api/Api'
+import { useQuery } from 'react-query'
 
 const AuctionsBody: FC = () => {
-  if (auctions.length === 0)
+  const { data, isLoading } = useQuery(
+    ['fetchAuctions'],
+    () => API.fetchAuctions(),
+    {
+      keepPreviousData: true,
+      refetchOnWindowFocus: false,
+    },
+  )
+  console.log(data)
+
+  if (isLoading) {
+    return (
+      <div className={styles.emptyBody}>
+        <div className={styles.emptyStateContainer}>
+          <div className={styles.caption}>Loading auctions ...</div>
+        </div>
+      </div>
+    )
+  }
+
+  if (data?.data.length === 0)
     return (
       <div className={styles.emptyBody}>
         <div className={styles.emptyStateContainer}>
@@ -36,9 +40,10 @@ const AuctionsBody: FC = () => {
         </div>
       </div>
     )
+
   return (
     <div className={styles.auctionsContent}>
-      {auctions.map((auction, index) => (
+      {data?.data.map((auction: AuctionType, index: number) => (
         <AuctionCard key={index} auction={auction} />
       ))}
     </div>

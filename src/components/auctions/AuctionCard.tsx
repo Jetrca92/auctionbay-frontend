@@ -8,6 +8,7 @@ interface AuctionCardProps {
 }
 
 const AuctionCard: FC<AuctionCardProps> = ({ auction }) => {
+  console.log(auction.image)
   return (
     <div className={styles.card}>
       <div className={styles.content}>
