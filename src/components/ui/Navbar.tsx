@@ -11,7 +11,10 @@ import { Link, useLocation } from 'react-router-dom'
 import { routes } from 'constants/routesConstants'
 import authStore from 'stores/auth.store'
 
-const Navbar: FC = () => {
+interface NavbarProps {
+  toggleOverlay: () => void
+}
+const Navbar: FC<NavbarProps> = ({ toggleOverlay }) => {
   const location = useLocation()
   const [activeTab, setActiveTab] = useState('')
 
@@ -88,7 +91,7 @@ const Navbar: FC = () => {
               <div className={styles.ctaButton1}>
                 <img src={bellIcon} alt="bell" />
               </div>
-              <div className={styles.ctaButton2}>
+              <div className={styles.ctaButton2} onClick={toggleOverlay}>
                 <img src={addIcon} alt="add" />
               </div>
               <div className={styles.ctaButton1}>

@@ -1,0 +1,57 @@
+.newAuctionCard {
+  display: flex;
+  flex-direction: column;
+  width: 533px;
+  height: 647px;
+  top: 80px;
+  left: 80px;
+  padding: 16px;
+  gap: 16px;
+  border-radius: 16px;
+  background: #ffffff;
+}
+
+.newAuctionCardHeader {
+  width: 501px;
+  height: 28px;
+}
+
+.newAuctionCardPicture {
+  width: 501px;
+  height: 168px;
+  padding: 32px;
+  border-radius: 16px;
+  background: #f6f6f4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.newAuctionCardInner {
+  display: flex;
+  flex-direction: column;
+  width: 501px;
+  height: 331px;
+  gap: 16px;
+}
+
+.newAuctionCardBottomBar {
+  display: flex;
+  justify-content: end;
+  width: 501px;
+  height: 40px;
+  gap: 16px;
+}
+
+.addImageButton {
+  width: 114px;
+  height: 40px;
+  min-height: 40px;
+  padding: 8px 16px 8px 16px;
+  border-radius: 16px;
+  border: 1px solid #272d2d;
+  color: #071015;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+}

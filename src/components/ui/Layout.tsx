@@ -1,16 +1,24 @@
-import { FC, ReactNode } from 'react'
+import { FC, ReactNode, useState } from 'react'
 import Footer from './Footer'
 import Navbar from './Navbar'
+import NewAuction from 'components/overlays/NewAuction'
 
 interface Props {
   children: ReactNode | ReactNode[]
 }
 
 const Layout: FC<Props> = ({ children }) => {
+  const [isOverlayVisible, setIsOverlayVisible] = useState(false)
+
+  const toggleOverlay = () => {
+    setIsOverlayVisible(!isOverlayVisible)
+  }
+
   return (
     <>
-      <Navbar />
-      <div className="layout-container container-xxl p-4">{children}</div>
+      <Navbar toggleOverlay={toggleOverlay} />
+      <div>{children}</div>
+      {isOverlayVisible && <NewAuction toggleOverlay={toggleOverlay} />}
       <Footer />
     </>
   )
