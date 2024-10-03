@@ -1,27 +1,36 @@
 import { FC, useState } from 'react'
 import { observer } from 'mobx-react'
-import styles from 'styles/scss/Authentication.module.scss'
-import { Link, useNavigate } from 'react-router-dom'
+import styles from 'styles/scss/Overlays.module.scss'
+import { useNavigate } from 'react-router-dom'
 import { routes } from 'constants/routesConstants'
-import { LoginUserFields, useLoginForm } from 'hooks/react-hook-form/useLogin'
 import * as API from 'api/Api'
 import { StatusCode } from 'constants/errorConstants'
-import authStore from 'stores/auth.store'
 import { Controller } from 'react-hook-form'
 import {
   NewAuctionFields,
   useNewAuctionForm,
 } from 'hooks/react-hook-form/useNewAuction'
+import { userStorage } from 'utils/localStorage'
 
-const NewAuctionForm: FC = () => {
+interface NewAuctionProps {
+  toggleOverlay: () => void
+}
+
+const NewAuctionForm: FC<NewAuctionProps> = ({ toggleOverlay }) => {
   const navigate = useNavigate()
   const { handleSubmit, errors, control } = useNewAuctionForm()
   const [apiError, setApiError] = useState('')
   const [showError, setShowError] = useState(false)
 
   const onSubmit = handleSubmit(async (data: NewAuctionFields) => {
-    const response = await API.uploadAuction(data)
-    console.log(response)
+    const token = userStorage.getToken()
+    if (!token) {
+      setApiError('no token')
+      setShowError(true)
+      return
+    }
+    const response = await API.uploadAuction(data, token)
+
     if (response.data?.statusCode === StatusCode.BAD_REQUEST) {
       setApiError(response.data.message)
       setShowError(true)
@@ -32,82 +41,111 @@ const NewAuctionForm: FC = () => {
       setApiError(response.data.message)
       setShowError(true)
     } else {
-      authStore.login(response.data)
-      navigate('/')
+      navigate(`${routes.AUCTIONS}`)
     }
   })
 
   return (
     <>
-      <div className={styles.loginFormContainer}>
-        <div className={styles.loginFormTitle}>
-          <h1>Welcome back!</h1>
-          Please enter your details
+      <form className={styles.newAuctionCardInner} onSubmit={onSubmit}>
+        <div className={styles.formGroupTitle}>
+          <label className={styles.label} htmlFor="title">
+            Title
+          </label>
+          <Controller
+            name="title"
+            control={control}
+            render={({ field }) => (
+              <input
+                className={styles.formInputTitle}
+                type="text"
+                id="title"
+                placeholder="Write item name here"
+                {...field}
+              />
+            )}
+          />
+          {errors.title && (
+            <div className={styles.error}>{errors.title.message}</div>
+          )}
         </div>
 
-        <form className={styles.registerFormBody} onSubmit={onSubmit}>
-          <div className={styles.formInputs}>
-            <div className={styles.formGroup}>
-              <label className={styles.label} htmlFor="email">
-                Email
-              </label>
-              <Controller
-                name="email"
-                control={control}
-                render={({ field }) => (
-                  <input
-                    className={styles.formInput}
-                    type="email"
-                    id="email"
-                    placeholder="Enter your email"
-                    {...field}
-                  />
-                )}
+        <div className={styles.formGroupDescription}>
+          <label className={styles.label} htmlFor="description">
+            Description
+          </label>
+          <Controller
+            name="description"
+            control={control}
+            render={({ field }) => (
+              <textarea
+                className={styles.formInputDescription}
+                id="description"
+                placeholder="Write description here..."
+                {...field}
               />
-              {errors.email && (
-                <div className={styles.error}>{errors.email.message}</div>
-              )}
-            </div>
+            )}
+          />
+          {errors.description && (
+            <div className={styles.error}>{errors.description.message}</div>
+          )}
+        </div>
 
-            <div className={styles.formGroup}>
-              <label className={styles.label} htmlFor="password">
-                Password:
-              </label>
-              <Controller
-                name="password"
-                control={control}
-                render={({ field }) => (
-                  <input
-                    className={styles.formInput}
-                    type="password"
-                    id="password"
-                    placeholder="Enter your password"
-                    {...field}
-                  />
-                )}
-              />
-              {errors.password && (
-                <div className={styles.error}>{errors.password.message}</div>
-              )}
-            </div>
+        <div className={styles.formGroupSbs}>
+          <Controller
+            name="starting_price"
+            control={control}
+            render={({ field }) => (
+              <div className={styles.formGroupStartingPrice}>
+                <label className={styles.label} htmlFor="starting_price">
+                  Starting price
+                </label>
+                <input
+                  className={styles.formInputStartingPrice}
+                  type="text"
+                  id="starting_price"
+                  placeholder="Price"
+                  {...field}
+                />
+              </div>
+            )}
+          />
+          {errors.starting_price && (
+            <div className={styles.error}>{errors.starting_price.message}</div>
+          )}
 
-            <div className={styles.forgotPasswordText}>
-              <Link
-                to={routes.FORGOT_PASSWORD}
-                className="nav-link"
-                style={{ color: '#74817F' }}
-              >
-                Forgot password?
-              </Link>
-            </div>
-          </div>
+          <Controller
+            name="end_date"
+            control={control}
+            render={({ field }) => (
+              <div className={styles.formGroupEndDate}>
+                <label className={styles.label} htmlFor="end_date">
+                  End date
+                </label>
+                <input
+                  className={styles.formInputDate}
+                  type="date"
+                  id="end_date"
+                  {...field}
+                />
+              </div>
+            )}
+          />
+          {errors.end_date && (
+            <div className={styles.error}>{errors.end_date.message}</div>
+          )}
+        </div>
 
-          <button className={styles.registerButton} type="submit">
-            Login
+        <div className={styles.newAuctionCardBottomBar}>
+          <button className={styles.cancelButton} onClick={toggleOverlay}>
+            Cancel
           </button>
-        </form>
-        {showError && <div className={styles.error}>{apiError}</div>}
-      </div>
+          <button className={styles.startAuctionButton} type="submit">
+            Start auction
+          </button>
+        </div>
+      </form>
+      {showError && <div className={styles.error}>{apiError}</div>}
     </>
   )
 }

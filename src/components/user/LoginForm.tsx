@@ -5,7 +5,6 @@ import { Link, useNavigate } from 'react-router-dom'
 import { routes } from 'constants/routesConstants'
 import { LoginUserFields, useLoginForm } from 'hooks/react-hook-form/useLogin'
 import * as API from 'api/Api'
-import { StatusCode } from 'constants/errorConstants'
 import authStore from 'stores/auth.store'
 import { Controller } from 'react-hook-form'
 
@@ -17,19 +16,18 @@ const LoginForm: FC = () => {
 
   const onSubmit = handleSubmit(async (data: LoginUserFields) => {
     const response = await API.login(data)
-    console.log(response)
-    if (response.data?.statusCode === StatusCode.BAD_REQUEST) {
+    if (response.data?.statusCode) {
       setApiError(response.data.message)
       setShowError(true)
-    } else if (response.data?.statusCode === StatusCode.INTERNAL_SERVER_ERROR) {
-      setApiError(response.data.message)
-      setShowError(true)
-    } else if (response.data?.statusCode === StatusCode.UNAUTHORIZED) {
-      setApiError(response.data.message)
-      setShowError(true)
-    } else {
-      authStore.login(response.data)
+      return
+    }
+    try {
+      const user = await API.fetchUser(response.data)
+      authStore.login(user, response.data)
       navigate('/')
+    } catch (error) {
+      setApiError('Failed to fetch user information')
+      setShowError(true)
     }
   })
 

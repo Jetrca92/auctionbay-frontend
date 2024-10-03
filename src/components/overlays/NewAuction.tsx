@@ -1,3 +1,4 @@
+import NewAuctionForm from 'components/auctions/NewAuctionForm'
 import { FC } from 'react'
 import styles from 'styles/scss/Overlays.module.scss'
 
@@ -14,8 +15,7 @@ const NewAuction: FC<NewAuctionProps> = ({ toggleOverlay }) => {
       <div className={styles.newAuctionCardPicture}>
         <button className={styles.addImageButton}>Add image</button>
       </div>
-      <div className={styles.newAuctionCardInner}></div>
-      <div className={styles.newAuctionCardBottomBar}></div>
+      <NewAuctionForm toggleOverlay={toggleOverlay} />
     </div>
   )
 }

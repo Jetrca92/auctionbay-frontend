@@ -17,8 +17,12 @@ const Layout: FC<Props> = ({ children }) => {
   return (
     <>
       <Navbar toggleOverlay={toggleOverlay} />
-      <div>{children}</div>
-      {isOverlayVisible && <NewAuction toggleOverlay={toggleOverlay} />}
+
+      {isOverlayVisible ? (
+        <NewAuction toggleOverlay={toggleOverlay} />
+      ) : (
+        <div>{children}</div>
+      )}
       <Footer />
     </>
   )

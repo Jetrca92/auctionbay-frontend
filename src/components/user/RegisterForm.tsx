@@ -39,8 +39,15 @@ const RegisterForm: FC = () => {
         setApiError(loginResponse.data.message)
         setShowError(true)
       } else {
-        authStore.login(loginResponse.data)
-        navigate('/')
+        try {
+          const user = await API.fetchUser(response)
+          authStore.login(user, response)
+          navigate('/')
+        } catch (error) {
+          // Handle errors if fetching user fails
+          setApiError('Failed to fetch user information')
+          setShowError(true)
+        }
       }
     }
   })

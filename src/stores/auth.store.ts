@@ -4,7 +4,7 @@ import { userStorage } from 'utils/localStorage'
 
 export interface AuthContextType {
   user?: UserType | null
-  login: () => void
+  login: (user: UserType) => void
   signout: () => void
 }
 
@@ -15,13 +15,15 @@ class AuthStore {
     makeAutoObservable(this)
   }
 
-  login(user: UserType) {
+  login(user: UserType, token: string) {
+    userStorage.setToken(token)
     userStorage.setUser(user)
     this.user = user
   }
 
   signout() {
     userStorage.clearUser()
+    userStorage.clearToken()
     this.user = undefined
   }
 }

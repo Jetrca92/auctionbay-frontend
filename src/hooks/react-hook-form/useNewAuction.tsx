@@ -7,7 +7,7 @@ export interface NewAuctionFields {
   image?: string | null
   description: string
   starting_price: number
-  end_date: Date | null
+  end_date: string
 }
 
 export const useNewAuctionForm = () => {
@@ -18,7 +18,7 @@ export const useNewAuctionForm = () => {
     starting_price: Yup.number()
       .moreThan(0, 'Price must be greater than 0')
       .required('Please enter starting price'),
-    end_date: Yup.date().required('Please select end date').nullable(),
+    end_date: Yup.string().required(),
   })
 
   const {
@@ -31,7 +31,7 @@ export const useNewAuctionForm = () => {
       image: null,
       description: '',
       starting_price: undefined,
-      end_date: null,
+      end_date: '',
     },
     mode: 'onSubmit',
     resolver: yupResolver(NewAuctionSchema),
