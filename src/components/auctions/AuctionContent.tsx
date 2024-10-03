@@ -3,7 +3,7 @@ import styles from 'styles/scss/Auction.module.scss'
 import chair from 'styles/images/chairBig.png'
 import Tag from 'components/ui/Tag'
 import TimeTag from 'components/ui/TimeTag'
-import { AuctionType } from 'models/auction'
+import { AuctionType, calculateHoursLeft } from 'models/auction'
 import avatar from 'styles/images/Avatar.png'
 
 interface AuctionCardProps {
@@ -21,7 +21,7 @@ const AuctionContent: FC<AuctionCardProps> = ({ auction }) => {
             <div className={styles.innerDetailsCard}>
               <div className={styles.metaBar}>
                 <Tag>Outbid</Tag>
-                <TimeTag>{auction.auction_duration_hrs}</TimeTag>
+                <TimeTag>{calculateHoursLeft(auction)}</TimeTag>
               </div>
               <h1 className={styles.title}>{auction.title}</h1>
               <div className={styles.description}>{auction.description}</div>

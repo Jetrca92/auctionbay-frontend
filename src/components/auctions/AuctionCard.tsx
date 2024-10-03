@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import styles from 'styles/scss/Auctions.module.scss'
 import timeIcon from 'styles/images/time.png'
-import { AuctionType } from 'models/auction'
+import { AuctionType, calculateHoursLeft } from 'models/auction'
 
 interface AuctionCardProps {
   auction: AuctionType // Auction prop type
@@ -16,7 +16,7 @@ const AuctionCard: FC<AuctionCardProps> = ({ auction }) => {
             <div className={styles.tagText}>In progress</div>
           </div>
           <div className={styles.timeTag}>
-            <div>{auction.auction_duration_hrs}h</div>
+            <div>{calculateHoursLeft(auction)}h</div>
             <div className={styles.timeIcon}>
               <img src={timeIcon} alt="time-icon" />
             </div>

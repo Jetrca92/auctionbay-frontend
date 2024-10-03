@@ -29,6 +29,7 @@ const NewAuctionForm: FC<NewAuctionProps> = ({ toggleOverlay }) => {
       setShowError(true)
       return
     }
+    console.log(data)
     const response = await API.uploadAuction(data, token)
 
     if (response.data?.statusCode === StatusCode.BAD_REQUEST) {
