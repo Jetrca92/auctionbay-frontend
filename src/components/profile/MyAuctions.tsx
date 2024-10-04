@@ -1,17 +1,20 @@
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import styles from 'styles/scss/MyAuctions.module.scss'
 import timeIcon from 'styles/images/time.png'
 import trash from 'styles/images/trash.png'
 import edit from 'styles/images/edit.png'
 import { AuctionType, calculateHoursLeft } from 'models/auction'
 import { userStorage } from 'utils/localStorage'
-import { useQuery } from 'react-query'
+import { useMutation, useQuery } from 'react-query'
 import * as API from 'api/Api'
+import { StatusCode } from 'constants/errorConstants'
 
 const MyAuctions: FC = () => {
   const token = userStorage.getToken()
+  const [apiError, setApiError] = useState('')
+  const [showError, setShowError] = useState(false)
 
-  const { data, isLoading } = useQuery(
+  const { data, isLoading, refetch } = useQuery(
     ['fetchUserAuctions'],
     () => {
       if (token) {
@@ -25,6 +28,39 @@ const MyAuctions: FC = () => {
     },
   )
   console.log(data)
+
+  const { mutate } = useMutation(
+    ({ id, token }: { id: string; token: string }) =>
+      API.deleteAuction(id, token),
+    {
+      onSuccess: (response) => {
+        if (response.data?.statusCode === StatusCode.BAD_REQUEST) {
+          setApiError(response.data.message)
+          setShowError(true)
+        } else if (
+          response.data?.statusCode === StatusCode.INTERNAL_SERVER_ERROR
+        ) {
+          setApiError(response.data.message)
+          setShowError(true)
+        } else {
+          refetch()
+        }
+      },
+      onError: () => {
+        setApiError('Something went wrong while deleting a product.')
+        setShowError(true)
+      },
+    },
+  )
+
+  const handleDelete = (id: string) => {
+    if (!token) {
+      setApiError('You are not authenticated.')
+      setShowError(true)
+      return
+    }
+    mutate({ id, token })
+  }
 
   if (data?.data.length === 0)
     return (
@@ -91,9 +127,13 @@ const MyAuctions: FC = () => {
             />
             {auction.is_active && (
               <div className={styles.editFrame}>
-                <button className={styles.deleteBtn}>
+                <button
+                  className={styles.deleteBtn}
+                  onClick={() => handleDelete(auction.id)}
+                >
                   <img src={trash} alt="trash-con" />
                 </button>
+                {showError && <div className={styles.error}>{apiError}</div>}
                 <button className={styles.editBtn}>
                   <img src={edit} alt="edit" />
                   <div className={styles.btnLabel}>Edit</div>

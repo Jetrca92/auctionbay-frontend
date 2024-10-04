@@ -15,7 +15,7 @@ export const uploadAuction = async (data: NewAuctionFields, token: string) => {
     apiRoutes.UPLOAD_AUCTION,
     data,
     {
-      headers: headers,
+      headers,
     },
   )
   return response.data
@@ -24,9 +24,25 @@ export const uploadAuction = async (data: NewAuctionFields, token: string) => {
 export const updateAuction = async (data: UpdateUserFields, id: string) =>
   apiRequest<UpdateUserFields, void>(
     'patch',
-    `/me/${apiRoutes.AUCTION_PREFIX}/${id}`,
+    `${apiRoutes.AUCTION_PREFIX}/${id}`,
     data,
   )
+
+export const deleteAuction = async (id: string, token: string) => {
+  const headers: AxiosRequestHeaders = AxiosHeaders.from({
+    Authorization: `Bearer ${token}`,
+    'Content-Type': 'application/json',
+  })
+  const response = await apiRequest<string, void>(
+    'delete',
+    `${apiRoutes.AUCTION_PREFIX}/${id}`,
+    undefined,
+    {
+      headers,
+    },
+  )
+  return response.data
+}
 
 export const fetchAuctions = async () =>
   apiRequest<undefined, AuctionType[]>('get', apiRoutes.FETCH_AUCTIONS)
