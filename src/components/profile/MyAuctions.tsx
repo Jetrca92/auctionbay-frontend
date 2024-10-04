@@ -1,38 +1,32 @@
 import { FC } from 'react'
 import styles from 'styles/scss/MyAuctions.module.scss'
 import timeIcon from 'styles/images/time.png'
-import microphone from 'styles/images/microphone.png'
 import trash from 'styles/images/trash.png'
 import edit from 'styles/images/edit.png'
-import chair from 'styles/images/chair.png'
-
-type Auction = {
-  title: string
-  image: string
-  starting_price: number
-  duration?: number
-  is_active: boolean
-}
-
-const auctions: Auction[] = [
-  {
-    title: 'Old chair',
-    image: chair,
-    starting_price: 65,
-    duration: 24,
-    is_active: true,
-  },
-  {
-    title: 'Awesome microphone pro',
-    image: microphone,
-    starting_price: 65,
-    duration: 24,
-    is_active: false,
-  },
-]
+import { AuctionType, calculateHoursLeft } from 'models/auction'
+import { userStorage } from 'utils/localStorage'
+import { useQuery } from 'react-query'
+import * as API from 'api/Api'
 
 const MyAuctions: FC = () => {
-  if (auctions.length === 0)
+  const token = userStorage.getToken()
+
+  const { data, isLoading } = useQuery(
+    ['fetchUserAuctions'],
+    () => {
+      if (token) {
+        return API.fetchUserAuctions(token)
+      }
+      return Promise.resolve([])
+    },
+    {
+      keepPreviousData: true,
+      refetchOnWindowFocus: false,
+    },
+  )
+  console.log(data)
+
+  if (data?.data.length === 0)
     return (
       <div className={styles.emptyContainer}>
         <div className={styles.emptyState}>
@@ -47,9 +41,19 @@ const MyAuctions: FC = () => {
       </div>
     )
 
+  if (isLoading) {
+    return (
+      <div className={styles.emptyBody}>
+        <div className={styles.emptyStateContainer}>
+          <div className={styles.caption}>Loading auctions ...</div>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className={styles.myAuctions}>
-      {auctions.map((auction, index) => (
+      {data?.data.map((auction: AuctionType, index: number) => (
         <div className={styles.cardMyAuctions} key={index}>
           <div className={styles.content}>
             <div className={styles.tagHeader}>
@@ -62,9 +66,9 @@ const MyAuctions: FC = () => {
                   <div className={styles.tagText}>Done</div>
                 </div>
               )}
-              {auction.duration && (
+              {calculateHoursLeft(auction) && (
                 <div className={styles.timeTag}>
-                  <div>{auction.duration}h</div>
+                  <div>{calculateHoursLeft(auction)}h</div>
                   <div className={styles.timeIcon}>
                     <img src={timeIcon} alt="time-icon" />
                   </div>

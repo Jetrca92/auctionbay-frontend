@@ -31,5 +31,21 @@ export const updateAuction = async (data: UpdateUserFields, id: string) =>
 export const fetchAuctions = async () =>
   apiRequest<undefined, AuctionType[]>('get', apiRoutes.FETCH_AUCTIONS)
 
+export const fetchUserAuctions = async (token: string) => {
+  const headers: AxiosRequestHeaders = AxiosHeaders.from({
+    Authorization: `Bearer ${token}`,
+    'Content-Type': 'application/json',
+  })
+  const response = await apiRequest<void, AuctionType[]>(
+    'get',
+    apiRoutes.FETCH_USER_AUCTIONS,
+    undefined,
+    {
+      headers: headers,
+    },
+  )
+  return response
+}
+
 export const bidAuction = async (formData: FormData) =>
   apiRequest<FormData, void>('post', apiRoutes.BID_AUCTION)
