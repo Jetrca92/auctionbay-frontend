@@ -30,7 +30,7 @@ export const useNewAuctionForm = () => {
       title: '',
       image: null,
       description: '',
-      starting_price: undefined,
+      starting_price: 0,
       end_date: '',
     },
     mode: 'onSubmit',

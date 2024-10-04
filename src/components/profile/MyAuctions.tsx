@@ -25,9 +25,17 @@ const MyAuctions: FC = () => {
     {
       keepPreviousData: true,
       refetchOnWindowFocus: false,
+      onError: (error: any) => {
+        if (error.response?.status === StatusCode.UNAUTHORIZED) {
+          setApiError('You are not authenticated. Please log in.')
+          setShowError(true)
+        } else {
+          setApiError('An error occurred while fetching auctions.')
+          setShowError(true)
+        }
+      },
     },
   )
-  console.log(data)
 
   const { mutate } = useMutation(
     ({ id, token }: { id: string; token: string }) =>
@@ -76,6 +84,28 @@ const MyAuctions: FC = () => {
         </div>
       </div>
     )
+
+  if (showError) {
+    return (
+      <div className={styles.emptyBody}>
+        <div className={styles.emptyStateContainer}>
+          <div className={styles.error}>{apiError}</div>
+        </div>
+      </div>
+    )
+  }
+
+  if (!data || !Array.isArray(data.data)) {
+    return (
+      <div className={styles.emptyBody}>
+        <div className={styles.emptyStateContainer}>
+          <div className={styles.caption}>
+            No auctions found or an error occurred.
+          </div>
+        </div>
+      </div>
+    )
+  }
 
   if (isLoading) {
     return (
@@ -133,7 +163,6 @@ const MyAuctions: FC = () => {
                 >
                   <img src={trash} alt="trash-con" />
                 </button>
-                {showError && <div className={styles.error}>{apiError}</div>}
                 <button className={styles.editBtn}>
                   <img src={edit} alt="edit" />
                   <div className={styles.btnLabel}>Edit</div>

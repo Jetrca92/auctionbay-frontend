@@ -17,7 +17,8 @@ export type AuctionType = {
 export const calculateHoursLeft = (auction: AuctionType) => {
   const endDate = new Date(auction.end_date)
   const currentTime = new Date()
-  const timeDifference = endDate.getTime() - currentTime.getTime()
+  const endDateCurrentHours = new Date(endDate.setHours(currentTime.getHours()))
+  const timeDifference = endDateCurrentHours.getTime() - currentTime.getTime()
   const remainingHours = Math.max(0, timeDifference / (1000 * 60 * 60))
   return Math.round(remainingHours)
 }

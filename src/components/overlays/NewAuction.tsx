@@ -8,14 +8,16 @@ interface NewAuctionProps {
 
 const NewAuction: FC<NewAuctionProps> = ({ toggleOverlay }) => {
   return (
-    <div className={styles.newAuctionCard}>
-      <div className={styles.newAuctionCardHeader}>
-        <h4>Add auction</h4>
+    <div className={styles.container}>
+      <div className={styles.newAuctionCard}>
+        <div className={styles.newAuctionCardHeader}>
+          <h4>Add auction</h4>
+        </div>
+        <div className={styles.newAuctionCardPicture}>
+          <button className={styles.addImageButton}>Add image</button>
+        </div>
+        <NewAuctionForm toggleOverlay={toggleOverlay} />
       </div>
-      <div className={styles.newAuctionCardPicture}>
-        <button className={styles.addImageButton}>Add image</button>
-      </div>
-      <NewAuctionForm toggleOverlay={toggleOverlay} />
     </div>
   )
 }
