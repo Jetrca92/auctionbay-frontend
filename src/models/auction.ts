@@ -1,3 +1,4 @@
+import { NewAuctionFields } from 'hooks/react-hook-form/useNewAuction'
 import { UserType } from './auth'
 import { BidType } from './bid'
 
@@ -7,7 +8,7 @@ export type AuctionType = {
   title: string
   image?: string
   description: string
-  starting_price: string
+  starting_price: number
   end_date: string
   is_active: boolean
   owner: UserType

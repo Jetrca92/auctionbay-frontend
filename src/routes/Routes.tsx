@@ -57,33 +57,38 @@ export const AppRoutes: AppRoute[] = [
   },
   // Private Routes
   {
-    type: RouteType.PUBLIC,
+    type: RouteType.PRIVATE,
     path: '/profile',
     children: <Profile />,
   },
   {
-    type: RouteType.PUBLIC,
+    type: RouteType.PRIVATE,
     path: '/profile-bidding',
     children: <Bidding />,
   },
   {
-    type: RouteType.PUBLIC,
+    type: RouteType.PRIVATE,
     path: '/profile-won',
     children: <Won />,
   },
   {
-    type: RouteType.PUBLIC,
+    type: RouteType.PRIVATE,
     path: '/auctions',
     children: <Auctions />,
   },
   {
-    type: RouteType.PUBLIC,
+    type: RouteType.PRIVATE,
     path: '/auction',
     children: <Auction />,
   },
 ]
 
-const Routes: FC = () => {
+interface RoutesProps {
+  isOverlayVisible: boolean
+  toggleOverlay: () => void
+}
+
+const Routes: FC<RoutesProps> = ({ isOverlayVisible, toggleOverlay }) => {
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <Switch>

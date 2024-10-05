@@ -8,11 +8,15 @@ import { userStorage } from 'utils/localStorage'
 import { useMutation, useQuery } from 'react-query'
 import * as API from 'api/Api'
 import { StatusCode } from 'constants/errorConstants'
+import { useOverlay } from 'components/overlays/OverlayContext'
+import { useLocation } from 'react-router-dom'
 
 const MyAuctions: FC = () => {
   const token = userStorage.getToken()
+  const location = useLocation()
   const [apiError, setApiError] = useState('')
   const [showError, setShowError] = useState(false)
+  const { toggleOverlay } = useOverlay()
 
   const { data, isLoading, refetch } = useQuery(
     ['fetchUserAuctions'],
@@ -68,6 +72,10 @@ const MyAuctions: FC = () => {
       return
     }
     mutate({ id, token })
+  }
+
+  const handleEditClick = (auction: AuctionType) => {
+    toggleOverlay(auction)
   }
 
   if (data?.data.length === 0)
@@ -163,7 +171,10 @@ const MyAuctions: FC = () => {
                 >
                   <img src={trash} alt="trash-con" />
                 </button>
-                <button className={styles.editBtn}>
+                <button
+                  className={styles.editBtn}
+                  onClick={() => handleEditClick(auction)}
+                >
                   <img src={edit} alt="edit" />
                   <div className={styles.btnLabel}>Edit</div>
                 </button>

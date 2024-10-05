@@ -91,7 +91,10 @@ const Navbar: FC<NavbarProps> = ({ toggleOverlay }) => {
               <div className={styles.ctaButton1}>
                 <img src={bellIcon} alt="bell" />
               </div>
-              <div className={styles.ctaButton2} onClick={toggleOverlay}>
+              <div
+                className={styles.ctaButton2}
+                onClick={() => toggleOverlay()}
+              >
                 <img src={addIcon} alt="add" />
               </div>
               <div className={styles.ctaButton1}>

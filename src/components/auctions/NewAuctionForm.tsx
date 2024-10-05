@@ -4,47 +4,83 @@ import styles from 'styles/scss/Overlays.module.scss'
 import { useNavigate } from 'react-router-dom'
 import { routes } from 'constants/routesConstants'
 import * as API from 'api/Api'
-import { StatusCode } from 'constants/errorConstants'
 import { Controller } from 'react-hook-form'
 import {
   NewAuctionFields,
   useNewAuctionForm,
 } from 'hooks/react-hook-form/useNewAuction'
 import { userStorage } from 'utils/localStorage'
+import { useOverlay } from 'components/overlays/OverlayContext'
+import { AuctionType } from 'models/auction'
 
 interface NewAuctionProps {
   toggleOverlay: () => void
+  defaultValues?: AuctionType
 }
 
-const NewAuctionForm: FC<NewAuctionProps> = ({ toggleOverlay }) => {
+const NewAuctionForm: FC<NewAuctionProps> = ({
+  toggleOverlay,
+  defaultValues,
+}) => {
+  console.log(defaultValues)
   const navigate = useNavigate()
-  const { handleSubmit, errors, control } = useNewAuctionForm()
+
+  const { handleSubmit, errors, control } = useNewAuctionForm({ defaultValues })
   const [apiError, setApiError] = useState('')
   const [showError, setShowError] = useState(false)
+  const { resetDefaultValues } = useOverlay()
 
-  const onSubmit = handleSubmit(async (data: NewAuctionFields) => {
-    const token = userStorage.getToken()
-    if (!token) {
-      setApiError('no token')
-      setShowError(true)
-      return
-    }
-    console.log(data)
+  const onSubmit = handleSubmit(
+    async (data: NewAuctionFields | AuctionType) => {
+      const token = userStorage.getToken()
+      if (!token) {
+        setApiError('no token')
+        setShowError(true)
+        return
+      }
+      if (!defaultValues) await handleAdd(data, token)
+      else await handleUpdate(data, defaultValues?.id, token)
+    },
+  )
+
+  const handleAdd = async (data: NewAuctionFields, token: string) => {
     const response = await API.uploadAuction(data, token)
-
-    if (response.data?.statusCode === StatusCode.BAD_REQUEST) {
-      setApiError(response.data.message)
-      setShowError(true)
-    } else if (response.data?.statusCode === StatusCode.INTERNAL_SERVER_ERROR) {
-      setApiError(response.data.message)
-      setShowError(true)
-    } else if (response.data?.statusCode === StatusCode.UNAUTHORIZED) {
+    if (response.data?.statusCode) {
       setApiError(response.data.message)
       setShowError(true)
     } else {
       navigate(`${routes.AUCTIONS}`)
+      resetDefaultValues()
+      toggleOverlay()
     }
-  })
+  }
+
+  const handleUpdate = async (
+    data: NewAuctionFields,
+    id: string,
+    token: string,
+  ) => {
+    const response = await API.updateAuction(
+      {
+        title: data.title,
+        description: data.description,
+        end_date: data.end_date,
+        image: data.image,
+        starting_price: data.starting_price,
+      },
+      id,
+      token,
+    )
+    if (response.data?.statusCode) {
+      setApiError(response.data.message)
+      setShowError(true)
+    } else {
+      console.log(data)
+      navigate(`${routes.AUCTIONS}`)
+      resetDefaultValues()
+      toggleOverlay()
+    }
+  }
 
   return (
     <>
@@ -138,11 +174,14 @@ const NewAuctionForm: FC<NewAuctionProps> = ({ toggleOverlay }) => {
         </div>
 
         <div className={styles.newAuctionCardBottomBar}>
-          <button className={styles.cancelButton} onClick={toggleOverlay}>
+          <button
+            className={styles.cancelButton}
+            onClick={() => toggleOverlay()}
+          >
             Cancel
           </button>
           <button className={styles.startAuctionButton} type="submit">
-            Start auction
+            {defaultValues ? 'Update auction' : 'Start auction'}
           </button>
         </div>
       </form>

@@ -1,12 +1,10 @@
 import NewAuctionForm from 'components/auctions/NewAuctionForm'
 import { FC } from 'react'
 import styles from 'styles/scss/Overlays.module.scss'
+import { useOverlay } from './OverlayContext'
 
-interface NewAuctionProps {
-  toggleOverlay: () => void
-}
-
-const NewAuction: FC<NewAuctionProps> = ({ toggleOverlay }) => {
+const NewAuction: FC = () => {
+  const { toggleOverlay, defaultValues } = useOverlay()
   return (
     <div className={styles.container}>
       <div className={styles.newAuctionCard}>
@@ -16,7 +14,10 @@ const NewAuction: FC<NewAuctionProps> = ({ toggleOverlay }) => {
         <div className={styles.newAuctionCardPicture}>
           <button className={styles.addImageButton}>Add image</button>
         </div>
-        <NewAuctionForm toggleOverlay={toggleOverlay} />
+        <NewAuctionForm
+          toggleOverlay={toggleOverlay}
+          defaultValues={defaultValues}
+        />
       </div>
     </div>
   )

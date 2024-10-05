@@ -14,7 +14,6 @@ const AuctionsBody: FC = () => {
       refetchOnWindowFocus: false,
     },
   )
-  console.log(data)
 
   if (isLoading) {
     return (

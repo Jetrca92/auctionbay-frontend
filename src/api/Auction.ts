@@ -1,8 +1,10 @@
 import { apiRoutes } from 'constants/apiConstants'
 import { apiRequest } from './Api'
 import { AuctionType } from 'models/auction'
-import { UpdateUserFields } from 'hooks/react-hook-form/useCreateUpdateUserForm'
-import { NewAuctionFields } from 'hooks/react-hook-form/useNewAuction'
+import {
+  NewAuctionFields,
+  UpdateAuctionFields,
+} from 'hooks/react-hook-form/useNewAuction'
 import { AxiosHeaders, AxiosRequestHeaders } from 'axios'
 
 export const uploadAuction = async (data: NewAuctionFields, token: string) => {
@@ -21,12 +23,25 @@ export const uploadAuction = async (data: NewAuctionFields, token: string) => {
   return response.data
 }
 
-export const updateAuction = async (data: UpdateUserFields, id: string) =>
-  apiRequest<UpdateUserFields, void>(
+export const updateAuction = async (
+  data: UpdateAuctionFields,
+  id: string,
+  token: string,
+) => {
+  const headers: AxiosRequestHeaders = AxiosHeaders.from({
+    Authorization: `Bearer ${token}`,
+    'Content-Type': 'application/json',
+  })
+  const response = await apiRequest<UpdateAuctionFields, void>(
     'patch',
     `${apiRoutes.AUCTION_PREFIX}/${id}`,
     data,
+    {
+      headers,
+    },
   )
+  return response.data
+}
 
 export const deleteAuction = async (id: string, token: string) => {
   const headers: AxiosRequestHeaders = AxiosHeaders.from({

@@ -10,7 +10,7 @@ const auction: AuctionType = {
   title: 'Vintage Chair',
   image: chair,
   description: 'This is a description for Vintage Chair auction.',
-  starting_price: '$100',
+  starting_price: 100,
   end_date: '24',
   is_active: true,
   owner: {

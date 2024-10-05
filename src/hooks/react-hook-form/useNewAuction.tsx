@@ -1,4 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup'
+import { AuctionType } from 'models/auction'
 import { useForm } from 'react-hook-form'
 import * as Yup from 'yup'
 
@@ -10,7 +11,19 @@ export interface NewAuctionFields {
   end_date: string
 }
 
-export const useNewAuctionForm = () => {
+export interface UpdateAuctionFields {
+  title?: string
+  image?: string | null
+  description?: string
+  starting_price?: number
+  end_date?: string
+}
+
+interface Props {
+  defaultValues?: AuctionType
+}
+
+export const useNewAuctionForm = ({ defaultValues }: Props) => {
   const NewAuctionSchema = Yup.object().shape({
     title: Yup.string().required('Please enter a title'),
     image: Yup.string().nullable().notRequired(),
@@ -32,6 +45,7 @@ export const useNewAuctionForm = () => {
       description: '',
       starting_price: 0,
       end_date: '',
+      ...defaultValues,
     },
     mode: 'onSubmit',
     resolver: yupResolver(NewAuctionSchema),
