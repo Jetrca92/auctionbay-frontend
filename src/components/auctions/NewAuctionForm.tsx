@@ -22,7 +22,6 @@ const NewAuctionForm: FC<NewAuctionProps> = ({
   toggleOverlay,
   defaultValues,
 }) => {
-  console.log(defaultValues)
   const navigate = useNavigate()
 
   const { handleSubmit, errors, control } = useNewAuctionForm({ defaultValues })
@@ -86,7 +85,6 @@ const NewAuctionForm: FC<NewAuctionProps> = ({
       setApiError(response.data.message)
       setShowError(true)
     } else {
-      console.log(data)
       navigate(`${routes.AUCTIONS}`)
       resetDefaultValues()
       toggleOverlay()

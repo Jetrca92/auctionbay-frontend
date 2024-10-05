@@ -77,6 +77,3 @@ export const fetchUserAuctions = async (token: string) => {
   )
   return response
 }
-
-export const bidAuction = async (formData: FormData) =>
-  apiRequest<FormData, void>('post', apiRoutes.BID_AUCTION)

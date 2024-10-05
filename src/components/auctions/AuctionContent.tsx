@@ -1,10 +1,10 @@
 import { FC } from 'react'
 import styles from 'styles/scss/Auction.module.scss'
-import chair from 'styles/images/chairBig.png'
 import Tag from 'components/ui/Tag'
 import TimeTag from 'components/ui/TimeTag'
 import { AuctionType, calculateHoursLeft } from 'models/auction'
 import avatar from 'styles/images/Avatar.png'
+import NewBidForm from 'components/bids/NewBidForm'
 
 interface AuctionCardProps {
   auction: AuctionType // Auction prop type
@@ -15,7 +15,7 @@ const AuctionContent: FC<AuctionCardProps> = ({ auction }) => {
   return (
     <div className={styles.auctionContent}>
       <div className={styles.innerContainer}>
-        <img src={chair} className={styles.image} alt="chair" />
+        <img src={auction.image} className={styles.image} alt="auctionImage" />
         <div className={styles.rightSide}>
           <div className={styles.detailsCard}>
             <div className={styles.innerDetailsCard}>
@@ -31,11 +31,7 @@ const AuctionContent: FC<AuctionCardProps> = ({ auction }) => {
                   <button className={styles.autoBidTabButton}>Auto bid</button>
                 </div>
               </div>
-              <div className={styles.actionBar}>
-                <div className={styles.actionBarText}>Bid:</div>
-                <input className={styles.bidNumberInput}></input>
-                <button className={styles.bidButton}>Place bid</button>
-              </div>
+              <NewBidForm auction={auction} />
             </div>
           </div>
           <div className={styles.biddingHistory}>

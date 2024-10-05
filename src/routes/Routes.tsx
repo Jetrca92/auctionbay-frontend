@@ -78,7 +78,7 @@ export const AppRoutes: AppRoute[] = [
   },
   {
     type: RouteType.PRIVATE,
-    path: '/auction',
+    path: '/auction/:id',
     children: <Auction />,
   },
 ]

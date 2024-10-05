@@ -9,6 +9,8 @@ import { useMutation, useQuery } from 'react-query'
 import * as API from 'api/Api'
 import { StatusCode } from 'constants/errorConstants'
 import { useOverlay } from 'components/overlays/OverlayContext'
+import { routes } from 'constants/routesConstants'
+import { Link } from 'react-router-dom'
 
 const MyAuctions: FC = () => {
   const token = userStorage.getToken()
@@ -126,7 +128,12 @@ const MyAuctions: FC = () => {
   return (
     <div className={styles.myAuctions}>
       {data?.data.map((auction: AuctionType, index: number) => (
-        <div className={styles.cardMyAuctions} key={index}>
+        <Link
+          className="auctionCardLink"
+          key={index}
+          to={`${routes.AUCTION_PREFIX}/${auction.id}`}
+          state={{ auction }}
+        >
           <div className={styles.content}>
             <div className={styles.tagHeader}>
               {auction.is_active ? (
@@ -179,7 +186,7 @@ const MyAuctions: FC = () => {
               </div>
             )}
           </div>
-        </div>
+        </Link>
       ))}
     </div>
   )

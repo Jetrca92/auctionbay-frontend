@@ -28,3 +28,11 @@ export const calculateHoursLeft = (auction: AuctionType) => {
   const remainingHours = Math.max(0, timeDifference / (1000 * 60 * 60))
   return Math.round(remainingHours)
 }
+
+export const getMinBidAmount = (auction: AuctionType) => {
+  if (auction.bids.length === 0) return auction.starting_price
+  const highestBid = auction.bids.reduce((maxBid, currentBid) => {
+    return currentBid.amount > maxBid.amount ? currentBid : maxBid
+  })
+  return highestBid.amount + 1
+}

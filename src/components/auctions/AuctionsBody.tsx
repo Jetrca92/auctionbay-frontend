@@ -4,6 +4,8 @@ import AuctionCard from './AuctionCard'
 import { AuctionType } from 'models/auction'
 import * as API from 'api/Api'
 import { useQuery } from 'react-query'
+import { Link } from 'react-router-dom'
+import { routes } from 'constants/routesConstants'
 
 const AuctionsBody: FC = () => {
   const { data, isLoading } = useQuery(
@@ -43,7 +45,14 @@ const AuctionsBody: FC = () => {
   return (
     <div className={styles.auctionsContent}>
       {data?.data.map((auction: AuctionType, index: number) => (
-        <AuctionCard key={index} auction={auction} />
+        <Link
+          key={index}
+          className={'auctionCardLink'}
+          to={`${routes.AUCTION_PREFIX}/${auction.id}`}
+          state={{ auction }}
+        >
+          <AuctionCard auction={auction} />
+        </Link>
       ))}
     </div>
   )
