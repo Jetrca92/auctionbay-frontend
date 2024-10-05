@@ -1,4 +1,3 @@
-import { NewAuctionFields } from 'hooks/react-hook-form/useNewAuction'
 import { UserType } from './auth'
 import { BidType } from './bid'
 
@@ -17,9 +16,15 @@ export type AuctionType = {
 
 export const calculateHoursLeft = (auction: AuctionType) => {
   const endDate = new Date(auction.end_date)
-  const currentTime = new Date()
-  const endDateCurrentHours = new Date(endDate.setHours(currentTime.getHours()))
-  const timeDifference = endDateCurrentHours.getTime() - currentTime.getTime()
+  const currentDate = new Date()
+
+  const createdAtTime = new Date(auction.created_at)
+  const hours = createdAtTime.getHours()
+  const minutes = createdAtTime.getMinutes()
+  const seconds = createdAtTime.getSeconds()
+  endDate.setHours(hours, minutes, seconds)
+
+  const timeDifference = endDate.getTime() - currentDate.getTime()
   const remainingHours = Math.max(0, timeDifference / (1000 * 60 * 60))
   return Math.round(remainingHours)
 }

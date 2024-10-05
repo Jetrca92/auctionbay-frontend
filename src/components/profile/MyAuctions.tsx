@@ -9,11 +9,9 @@ import { useMutation, useQuery } from 'react-query'
 import * as API from 'api/Api'
 import { StatusCode } from 'constants/errorConstants'
 import { useOverlay } from 'components/overlays/OverlayContext'
-import { useLocation } from 'react-router-dom'
 
 const MyAuctions: FC = () => {
   const token = userStorage.getToken()
-  const location = useLocation()
   const [apiError, setApiError] = useState('')
   const [showError, setShowError] = useState(false)
   const { toggleOverlay } = useOverlay()
@@ -140,7 +138,7 @@ const MyAuctions: FC = () => {
                   <div className={styles.tagText}>Done</div>
                 </div>
               )}
-              {calculateHoursLeft(auction) && (
+              {calculateHoursLeft(auction) > 0 && (
                 <div className={styles.timeTag}>
                   <div>{calculateHoursLeft(auction)}h</div>
                   <div className={styles.timeIcon}>

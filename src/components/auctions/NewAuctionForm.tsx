@@ -30,6 +30,17 @@ const NewAuctionForm: FC<NewAuctionProps> = ({
   const [showError, setShowError] = useState(false)
   const { resetDefaultValues } = useOverlay()
 
+  const getTomorrowDate = () => {
+    const today = new Date()
+    today.setDate(today.getDate() + 1)
+    const dd = String(today.getDate()).padStart(2, '0')
+    const mm = String(today.getMonth() + 1).padStart(2, '0')
+    const yyyy = today.getFullYear()
+    return `${yyyy}-${mm}-${dd}`
+  }
+
+  const tomorrowDate = getTomorrowDate()
+
   const onSubmit = handleSubmit(
     async (data: NewAuctionFields | AuctionType) => {
       const token = userStorage.getToken()
@@ -163,6 +174,7 @@ const NewAuctionForm: FC<NewAuctionProps> = ({
                   className={styles.formInputDate}
                   type="date"
                   id="end_date"
+                  min={tomorrowDate}
                   {...field}
                 />
               </div>
