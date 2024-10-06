@@ -159,8 +159,8 @@
 .tableItem {
   display: flex;
   align-items: center;
-  justify-content: center;
-  width: 648px;
+  justify-content: space-between;
+  width: 100%;
   height: 48px;
   padding: 8px 0px;
   gap: 32px;
@@ -171,17 +171,19 @@
   display: flex;
   align-items: center;
   justify-content: start;
-  width: 387px;
+  flex: 1;
   height: 32px;
   gap: 16px;
 }
 
 .tableItemDate {
-  width: 120px;
+  width: auto;
+  flex-shrink: 0;
   height: 24px;
   font-size: 16px;
   font-weight: 300;
   line-height: 24px;
+  text-align: end;
 }
 
 .tableItemPrice {
@@ -190,6 +192,7 @@
   font-weight: 600;
   line-height: 19.2px;
   text-align: left;
+  cursor: auto;
 }
 
 .avatar {

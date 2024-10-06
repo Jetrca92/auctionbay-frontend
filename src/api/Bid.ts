@@ -5,7 +5,7 @@ import { NewBidFields } from 'hooks/react-hook-form/useCreateNewBid'
 
 export const uploadBid = async (
   data: NewBidFields,
-  auctionId: string,
+  id: string,
   token: string,
 ) => {
   const headers: AxiosRequestHeaders = AxiosHeaders.from({
@@ -14,7 +14,7 @@ export const uploadBid = async (
   })
   const response = await apiRequest<NewBidFields, void>(
     'post',
-    apiRoutes.BID_AUCTION,
+    `${apiRoutes.BID_AUCTION_PREFIX}/${id}/bid`,
     data,
     {
       headers,

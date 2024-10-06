@@ -2,6 +2,7 @@ import { FC } from 'react'
 import styles from 'styles/scss/Auctions.module.scss'
 import timeIcon from 'styles/images/time.png'
 import { AuctionType, calculateHoursLeft } from 'models/auction'
+import noImage from 'styles/images/empty-image.png'
 
 interface AuctionCardProps {
   auction: AuctionType // Auction prop type
@@ -29,7 +30,15 @@ const AuctionCard: FC<AuctionCardProps> = ({ auction }) => {
       </div>
 
       <div className={styles.imageContainer}>
-        <img src={auction.image} alt={auction.title} className={styles.image} />
+        {auction.image ? (
+          <img
+            src={auction.image}
+            className={styles.image}
+            alt="auctionImage"
+          />
+        ) : (
+          <img src={noImage} className={styles.image} alt="noImage" />
+        )}
       </div>
     </div>
   )

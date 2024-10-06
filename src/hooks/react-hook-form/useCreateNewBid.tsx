@@ -13,18 +13,18 @@ interface Props {
 
 export const useCreateNewBid = ({ auction }: Props) => {
   const minBidAmount = getMinBidAmount(auction)
+
   const NewBidSchema = Yup.object().shape({
     amount: Yup.number()
-      .moreThan(minBidAmount, `Price must be greater than ${minBidAmount}`)
+      .min(minBidAmount, `Price must be greater than ${minBidAmount}`)
       .required('Please enter bid amount'),
-    end_date: Yup.string().required(),
   })
 
   const {
     handleSubmit,
     formState: { errors },
     control,
-  } = useForm({
+  } = useForm<NewBidFields>({
     defaultValues: {
       amount: minBidAmount,
     },

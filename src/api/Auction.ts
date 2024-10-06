@@ -14,7 +14,7 @@ export const uploadAuction = async (data: NewAuctionFields, token: string) => {
   })
   const response = await apiRequest<NewAuctionFields, void>(
     'post',
-    apiRoutes.UPLOAD_AUCTION,
+    apiRoutes.AUCTION_PREFIX,
     data,
     {
       headers,

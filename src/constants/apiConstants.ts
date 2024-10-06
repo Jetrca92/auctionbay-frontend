@@ -5,8 +5,6 @@ export enum apiRoutes {
   FETCH_USER_AUCTIONS = '/me/auctions',
   UPDATE_PASSWORD = '/me/update-password',
   AUCTION_PREFIX = '/me/auction',
-  UPLOAD_AUCTION = '/me/auction',
-  UPDATE_AUCTION = '/me/auction/:id',
   FETCH_AUCTIONS = '/auctions',
-  BID_AUCTION = '/auctions/:id/bid',
+  BID_AUCTION_PREFIX = '/auctions',
 }

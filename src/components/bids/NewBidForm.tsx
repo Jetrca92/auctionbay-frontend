@@ -7,7 +7,7 @@ import * as API from 'api/Api'
 import { Controller } from 'react-hook-form'
 import { userStorage } from 'utils/localStorage'
 import { AuctionType } from 'models/auction'
-import { BidType } from 'models/bid'
+import { isBidderOwner } from 'models/bid'
 import {
   NewBidFields,
   useCreateNewBid,
@@ -24,22 +24,20 @@ const NewBidForm: FC<NewBidProps> = ({ auction }) => {
   const [apiError, setApiError] = useState('')
   const [showError, setShowError] = useState(false)
 
-  const onSubmit = handleSubmit(async (data: NewBidFields | BidType) => {
+  const onSubmit = handleSubmit(async (data: NewBidFields) => {
     const token = userStorage.getToken()
     if (!token) {
       setApiError('no token')
       setShowError(true)
       return
     }
+    console.log(data.amount)
     await handleAdd(data, auction.id, token)
+    navigate(`${routes.AUCTION_PREFIX}/${auction.id}`, { state: { auction } })
   })
 
-  const handleAdd = async (
-    data: NewBidFields,
-    auctionId: string,
-    token: string,
-  ) => {
-    const response = await API.uploadBid(data, auctionId, token)
+  const handleAdd = async (data: NewBidFields, id: string, token: string) => {
+    const response = await API.uploadBid(data, id, token)
     if (response.data?.statusCode) {
       setApiError(response.data.message)
       setShowError(true)
@@ -66,12 +64,20 @@ const NewBidForm: FC<NewBidProps> = ({ auction }) => {
             />
           )}
         />
-        {errors.amount && (
-          <div className={styles.error}>{errors.amount?.message}</div>
+        {errors.amount && <div className="error">{errors.amount?.message}</div>}
+        {isBidderOwner(auction) ? (
+          <div>
+            <button className={styles.bidButton} disabled>
+              Place bid
+            </button>
+          </div>
+        ) : (
+          <button className={styles.bidButton} type="submit">
+            Place bid
+          </button>
         )}
-        <button className={styles.bidButton}>Place bid</button>
       </form>
-      {showError && <div className={styles.error}>{apiError}</div>}
+      {showError && <div className="error">{apiError}</div>}
     </>
   )
 }

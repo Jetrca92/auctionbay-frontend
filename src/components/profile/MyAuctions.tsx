@@ -11,6 +11,7 @@ import { StatusCode } from 'constants/errorConstants'
 import { useOverlay } from 'components/overlays/OverlayContext'
 import { routes } from 'constants/routesConstants'
 import { Link } from 'react-router-dom'
+import noImage from 'styles/images/empty-image.png'
 
 const MyAuctions: FC = () => {
   const token = userStorage.getToken()
@@ -163,11 +164,20 @@ const MyAuctions: FC = () => {
           <div
             className={`${auction.is_active ? styles.imageContainer : styles.imageContainerFull}`}
           >
-            <img
-              src={auction.image}
-              alt={auction.title}
-              className={`${auction.is_active ? styles.image : styles.imageFull}`}
-            />
+            {auction.image ? (
+              <img
+                src={auction.image}
+                alt={auction.title}
+                className={`${auction.is_active ? styles.image : styles.imageFull}`}
+              />
+            ) : (
+              <img
+                src={noImage}
+                className={`${auction.is_active ? styles.image : styles.imageFull}`}
+                alt="noImage"
+              />
+            )}
+
             {auction.is_active && (
               <div className={styles.editFrame}>
                 <button

@@ -1,7 +1,8 @@
 export type UserType = {
   id: string
-  username: string
-  email?: string
+  first_name?: string
+  last_name?: string
+  email: string
   token?: string
   auctions?: {
     id: string
