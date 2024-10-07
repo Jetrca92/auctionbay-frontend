@@ -11,8 +11,7 @@ export type BidType = {
 }
 
 export const isBidderOwner = (auction: AuctionType) => {
-  if (auction.owner.id === userStorage.getUser().id) return true
-  return false
+  return auction.owner.id === userStorage.getUser().id
 }
 
 export const isUserWinning = (auction: AuctionType) => {
@@ -22,5 +21,9 @@ export const isUserWinning = (auction: AuctionType) => {
 }
 
 export const hasUserWon = (auction: AuctionType) => {
+  if (auction.is_active) return false
   const user = userStorage.getUser()
+  const highestBidder = getHighestBidder(auction)
+  if (!highestBidder) return false
+  return highestBidder.id === user.id
 }

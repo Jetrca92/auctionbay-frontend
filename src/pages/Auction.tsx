@@ -5,10 +5,15 @@ import { useLocation } from 'react-router-dom'
 
 const Auction: FC = () => {
   const location = useLocation()
-  const auction = location.state?.auction
+  const auction = location.state?.auction || location.state?.newAuction
+
   return (
     <Layout>
-      <AuctionContent auction={auction} />
+      {auction ? (
+        <AuctionContent auction={auction} />
+      ) : (
+        <p>No auction data available</p>
+      )}
     </Layout>
   )
 }

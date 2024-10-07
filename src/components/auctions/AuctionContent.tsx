@@ -2,11 +2,12 @@ import { FC } from 'react'
 import styles from 'styles/scss/Auction.module.scss'
 import Tag from 'components/ui/Tag'
 import TimeTag from 'components/ui/TimeTag'
-import { AuctionType, calculateHoursLeft } from 'models/auction'
+import { AuctionType, calculateHoursLeft, isUserBidding } from 'models/auction'
 import NewBidForm from 'components/bids/NewBidForm'
 import noImage from 'styles/images/empty-image.png'
-import { BidType } from 'models/bid'
+import { BidType, isUserWinning } from 'models/bid'
 import BiddingHistoryTable from 'components/bids/BiddingHistoryTable'
+import { userStorage } from 'utils/localStorage'
 
 interface AuctionCardProps {
   auction: AuctionType
@@ -16,6 +17,7 @@ const AuctionContent: FC<AuctionCardProps> = ({ auction }) => {
   if (!auction) {
     return <p>Loading...</p>
   }
+  const user = userStorage.getUser()
   const bids = auction.bids || []
   let sortedBids: BidType[] = []
   if (bids.length > 0) {
@@ -39,10 +41,32 @@ const AuctionContent: FC<AuctionCardProps> = ({ auction }) => {
         <div className={styles.rightSide}>
           <div className={styles.detailsCard}>
             <div className={styles.innerDetailsCard}>
-              <div className={styles.metaBar}>
-                <Tag>Outbid</Tag>
-                <TimeTag>{calculateHoursLeft(auction)}</TimeTag>
-              </div>
+              {auction.is_active ? (
+                isUserBidding(auction, user) ? (
+                  isUserWinning(auction) ? (
+                    <div className={styles.metaBar}>
+                      <Tag>Winning</Tag>
+                      <TimeTag>{calculateHoursLeft(auction)}</TimeTag>
+                    </div>
+                  ) : (
+                    <div className={styles.metaBar}>
+                      <Tag>Outbid</Tag>
+                      <TimeTag>{calculateHoursLeft(auction)}</TimeTag>
+                    </div>
+                  )
+                ) : (
+                  <div className={styles.metaBar}>
+                    <Tag>In progress</Tag>
+                    <TimeTag>{calculateHoursLeft(auction)}</TimeTag>
+                  </div>
+                )
+              ) : (
+                <div className={styles.metaBar}>
+                  <Tag>Done</Tag>
+                  <TimeTag>{calculateHoursLeft(auction)}</TimeTag>
+                </div>
+              )}
+
               <h1 className={styles.title}>{auction.title}</h1>
               <div className={styles.description}>{auction.description}</div>
               <div className={styles.bidBar}>

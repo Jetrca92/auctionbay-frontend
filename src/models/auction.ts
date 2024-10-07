@@ -34,7 +34,7 @@ export const getMinBidAmount = (auction: AuctionType) => {
   const highestBid = auction.bids.reduce((maxBid, currentBid) => {
     return currentBid.amount > maxBid.amount ? currentBid : maxBid
   })
-  return highestBid.amount + 1
+  return Number(highestBid.amount) + 1
 }
 
 export const getHighestBidder = (auction: AuctionType) => {

@@ -31,9 +31,7 @@ const NewBidForm: FC<NewBidProps> = ({ auction }) => {
       setShowError(true)
       return
     }
-    console.log(data.amount)
     await handleAdd(data, auction.id, token)
-    navigate(`${routes.AUCTION_PREFIX}/${auction.id}`, { state: { auction } })
   })
 
   const handleAdd = async (data: NewBidFields, id: string, token: string) => {
@@ -42,7 +40,11 @@ const NewBidForm: FC<NewBidProps> = ({ auction }) => {
       setApiError(response.data.message)
       setShowError(true)
     } else {
-      navigate(`${routes.AUCTION_PREFIX}/${auction.id}`)
+      const newAuction = response.auction
+      console.log(newAuction)
+      navigate(`${routes.AUCTION_PREFIX}/${auction.id}`, {
+        state: { newAuction },
+      })
     }
   }
 

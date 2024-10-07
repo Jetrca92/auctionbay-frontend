@@ -10,7 +10,7 @@ import { routes } from 'constants/routesConstants'
 const AuctionsBody: FC = () => {
   const { data, isLoading } = useQuery(
     ['fetchAuctions'],
-    () => API.fetchAuctions(),
+    () => API.fetchActiveAuctions(),
     {
       keepPreviousData: true,
       refetchOnWindowFocus: false,

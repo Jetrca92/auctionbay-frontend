@@ -2,8 +2,9 @@ import { FC } from 'react'
 import styles from 'styles/scss/MyAuctions.module.scss'
 import * as API from 'api/Api'
 import { useQuery } from 'react-query'
-import { AuctionType } from 'models/auction'
-import { userStorage } from 'utils/localStorage'
+import { AuctionType, getMinBidAmount } from 'models/auction'
+import { hasUserWon } from 'models/bid'
+import noImage from 'styles/images/empty-image.png'
 
 const WonComponent: FC = () => {
   const { data, isLoading } = useQuery(
@@ -15,12 +16,12 @@ const WonComponent: FC = () => {
     },
   )
   const userWonAuctions: AuctionType[] = []
+
   if (data) {
-    const user = userStorage.getUser()
     const allAuctions: AuctionType[] = data.data
     allAuctions.forEach((auction: AuctionType) => {
-      if (has(auction, user)) {
-        userBiddedAuctions.push(auction)
+      if (hasUserWon(auction)) {
+        userWonAuctions.push(auction)
       }
     })
   }
@@ -65,15 +66,18 @@ const WonComponent: FC = () => {
             <div className={styles.titleContainer}>
               <div className={styles.titleText}>{auction.title}</div>
             </div>
-            <div className={styles.price}>{auction.starting_price} €</div>
+            <div className={styles.price}>{getMinBidAmount(auction) - 1} €</div>
           </div>
-
           <div className={styles.imageContainer}>
-            <img
-              src={auction.image}
-              alt={auction.title}
-              className={styles.image}
-            />
+            {auction.image ? (
+              <img
+                src={auction.image}
+                alt={auction.title}
+                className={styles.image}
+              />
+            ) : (
+              <img src={noImage} alt={auction.title} className={styles.image} />
+            )}
           </div>
         </div>
       ))}

@@ -59,6 +59,9 @@ export const deleteAuction = async (id: string, token: string) => {
   return response.data
 }
 
+export const fetchActiveAuctions = async () =>
+  apiRequest<undefined, AuctionType[]>('get', apiRoutes.FETCH_ACTIVE_AUCTIONS)
+
 export const fetchAuctions = async () =>
   apiRequest<undefined, AuctionType[]>('get', apiRoutes.FETCH_AUCTIONS)
 
