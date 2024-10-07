@@ -36,3 +36,17 @@ export const getMinBidAmount = (auction: AuctionType) => {
   })
   return highestBid.amount + 1
 }
+
+export const getHighestBidder = (auction: AuctionType) => {
+  if (auction.bids.length === 0) return null
+  const highestBid = auction.bids.reduce((maxBid, currentBid) => {
+    return currentBid.amount > maxBid.amount ? currentBid : maxBid
+  })
+  return highestBid.owner
+}
+
+export const isUserBidding = (auction: AuctionType, user: UserType) => {
+  if (auction.owner.id === user.id) return false
+  if (auction.bids.length === 0) return false
+  return auction.bids.some((bid) => bid.owner.id === user.id)
+}

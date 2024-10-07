@@ -21,12 +21,13 @@ const BiddingHistoryTable: FC<BidHistoryTableProps> = ({ bid, auction }) => {
     const formattedDate = `${hours}:${minutes} ${day}.${month}.${year}`
     return formattedDate
   }
+
   return (
     <div className={styles.biddingHistoryTable}>
       <div className={styles.tableItem}>
         <div className={styles.tableItemName}>
           <img src={avatar} alt="avatar" className={styles.avatar} />
-          {`${auction.owner.first_name} ${bid.owner.last_name}`}
+          {`${bid.owner.first_name} ${bid.owner.last_name}`}
         </div>
         <div className={styles.tableItemDate}>{formatDate(bid.created_at)}</div>
         <button className={styles.tableItemPrice}>{bid.amount} €</button>

@@ -1,26 +1,41 @@
 import { FC } from 'react'
 import styles from 'styles/scss/MyAuctions.module.scss'
-import chair from 'styles/images/chair.png'
+import * as API from 'api/Api'
+import { useQuery } from 'react-query'
+import { AuctionType } from 'models/auction'
+import { userStorage } from 'utils/localStorage'
 
-type Auction = {
-  title: string
-  image: string
-  starting_price: number
-  duration?: number
-  is_done: boolean
-}
-
-const auctions: Auction[] = [
-  {
-    title: 'Old chair',
-    image: chair,
-    starting_price: 65,
-    duration: 24,
-    is_done: true,
-  },
-]
 const WonComponent: FC = () => {
-  if (auctions.length === 0)
+  const { data, isLoading } = useQuery(
+    ['fetchAuctions'],
+    () => API.fetchAuctions(),
+    {
+      keepPreviousData: true,
+      refetchOnWindowFocus: false,
+    },
+  )
+  const userWonAuctions: AuctionType[] = []
+  if (data) {
+    const user = userStorage.getUser()
+    const allAuctions: AuctionType[] = data.data
+    allAuctions.forEach((auction: AuctionType) => {
+      if (has(auction, user)) {
+        userBiddedAuctions.push(auction)
+      }
+    })
+  }
+
+  if (isLoading) {
+    return (
+      <div className={styles.emptyContainer}>
+        <div className={styles.emptyStateBidding}>
+          <div className={styles.caption}>Loading ...</div>
+        </div>
+      </div>
+    )
+  }
+
+  if (userWonAuctions.length === 0)
     return (
       <div className={styles.emptyContainer}>
         <div className={styles.emptyStateWon}>
@@ -37,11 +52,11 @@ const WonComponent: FC = () => {
 
   return (
     <div className={styles.myAuctions}>
-      {auctions.map((auction, index) => (
+      {userWonAuctions.map((auction, index) => (
         <div className={styles.cardBidding} key={index}>
           <div className={styles.content}>
             <div className={styles.tagHeader}>
-              {auction.is_done && (
+              {!auction.is_active && (
                 <div className={styles.tagDone}>
                   <div className={styles.tagText}>Done</div>
                 </div>

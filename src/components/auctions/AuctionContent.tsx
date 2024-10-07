@@ -48,7 +48,9 @@ const AuctionContent: FC<AuctionCardProps> = ({ auction }) => {
               <div className={styles.bidBar}>
                 <div className={styles.bidBarTab}>
                   <button className={styles.bidTabButton}>Bid</button>
-                  <button className={styles.autoBidTabButton}>Auto bid</button>
+                  <button className={styles.autoBidTabButton} disabled>
+                    Auto bid
+                  </button>
                 </div>
               </div>
               <NewBidForm auction={auction} />
