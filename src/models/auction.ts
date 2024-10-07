@@ -32,7 +32,9 @@ export const calculateHoursLeft = (auction: AuctionType) => {
 export const getMinBidAmount = (auction: AuctionType) => {
   if (auction.bids.length === 0) return auction.starting_price
   const highestBid = auction.bids.reduce((maxBid, currentBid) => {
-    return currentBid.amount > maxBid.amount ? currentBid : maxBid
+    return Number(currentBid.amount) > Number(maxBid.amount)
+      ? currentBid
+      : maxBid
   })
   return Number(highestBid.amount) + 1
 }
@@ -40,7 +42,9 @@ export const getMinBidAmount = (auction: AuctionType) => {
 export const getHighestBidder = (auction: AuctionType) => {
   if (auction.bids.length === 0) return null
   const highestBid = auction.bids.reduce((maxBid, currentBid) => {
-    return currentBid.amount > maxBid.amount ? currentBid : maxBid
+    return Number(currentBid.amount) > Number(maxBid.amount)
+      ? currentBid
+      : maxBid
   })
   return highestBid.owner
 }

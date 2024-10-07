@@ -40,8 +40,8 @@ const NewBidForm: FC<NewBidProps> = ({ auction }) => {
       setApiError(response.data.message)
       setShowError(true)
     } else {
+      console.log(response)
       const newAuction = response.auction
-      console.log(newAuction)
       navigate(`${routes.AUCTION_PREFIX}/${auction.id}`, {
         state: { newAuction },
       })
