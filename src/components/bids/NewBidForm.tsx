@@ -36,12 +36,15 @@ const NewBidForm: FC<NewBidProps> = ({ auction }) => {
 
   const handleAdd = async (data: NewBidFields, id: string, token: string) => {
     const response = await API.uploadBid(data, id, token)
+
     if (response.data?.statusCode) {
       setApiError(response.data.message)
       setShowError(true)
     } else {
+      const response = await API.fetchAuction(auction.id)
+      const newAuction = response?.data
       console.log(response)
-      const newAuction = response.auction
+      console.log(newAuction)
       navigate(`${routes.AUCTION_PREFIX}/${auction.id}`, {
         state: { newAuction },
       })

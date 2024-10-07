@@ -65,6 +65,9 @@ export const fetchActiveAuctions = async () =>
 export const fetchAuctions = async () =>
   apiRequest<undefined, AuctionType[]>('get', apiRoutes.FETCH_AUCTIONS)
 
+export const fetchAuction = async (id: string) =>
+  apiRequest<undefined, AuctionType>('get', `${apiRoutes.FETCH_AUCTION}/${id}`)
+
 export const fetchUserAuctions = async (token: string) => {
   const headers: AxiosRequestHeaders = AxiosHeaders.from({
     Authorization: `Bearer ${token}`,

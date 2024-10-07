@@ -9,7 +9,7 @@ interface BidHistoryTableProps {
   auction: AuctionType
 }
 
-const BiddingHistoryTable: FC<BidHistoryTableProps> = ({ bid, auction }) => {
+const BiddingHistoryTable: FC<BidHistoryTableProps> = ({ bid }) => {
   const formatDate = (dateString: string) => {
     const date = new Date(dateString)
     const hours = String(date.getHours()).padStart(2, '0')
