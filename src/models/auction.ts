@@ -54,3 +54,35 @@ export const isUserBidding = (auction: AuctionType, user: UserType) => {
   if (auction.bids.length === 0) return false
   return auction.bids.some((bid) => bid.owner.id === user.id)
 }
+
+export const totalAuctionsPosted = (
+  auctions: AuctionType[],
+  user: UserType,
+) => {
+  const userAuctions: AuctionType[] = []
+  if (auctions.length > 0) {
+    auctions.forEach((auction: AuctionType) => {
+      if (auction.owner.id === user.id) {
+        userAuctions.push(auction)
+      }
+    })
+  }
+  return userAuctions.length
+}
+
+export const calculateTotalEarnings = (
+  auctions: AuctionType[],
+  user: UserType,
+) => {
+  if (auctions.length === 0) return 0
+  let total = 0
+  auctions.forEach((auction: AuctionType) => {
+    if (!auction.is_active && auction.owner.id === user.id) {
+      const minBidAmount = getMinBidAmount(auction)
+      if (auction.starting_price !== minBidAmount - 1) {
+        total += minBidAmount - 1
+      }
+    }
+  })
+  return total
+}

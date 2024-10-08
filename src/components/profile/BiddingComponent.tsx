@@ -12,7 +12,7 @@ import noImage from 'styles/images/empty-image.png'
 
 const BiddingComponent: FC = () => {
   const { data, isLoading } = useQuery(
-    ['fetchAuctions'],
+    ['fetchActiveAuctions'],
     () => API.fetchActiveAuctions(),
     {
       keepPreviousData: true,
