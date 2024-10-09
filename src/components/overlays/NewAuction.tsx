@@ -11,9 +11,6 @@ const NewAuction: FC = () => {
         <div className={styles.newAuctionCardHeader}>
           <h4>Add auction</h4>
         </div>
-        <div className={styles.newAuctionCardPicture}>
-          <button className={styles.addImageButton}>Add image</button>
-        </div>
         <NewAuctionForm
           toggleOverlay={toggleOverlay}
           defaultValues={defaultValues}

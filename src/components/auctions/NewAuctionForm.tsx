@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { ChangeEvent, FC, useEffect, useState } from 'react'
 import { observer } from 'mobx-react'
 import styles from 'styles/scss/Overlays.module.scss'
 import { useNavigate } from 'react-router-dom'
@@ -23,11 +23,14 @@ const NewAuctionForm: FC<NewAuctionProps> = ({
   defaultValues,
 }) => {
   const navigate = useNavigate()
-
   const { handleSubmit, errors, control } = useNewAuctionForm({ defaultValues })
   const [apiError, setApiError] = useState('')
   const [showError, setShowError] = useState(false)
   const { resetDefaultValues } = useOverlay()
+
+  const [file, setFile] = useState<File | null>(null)
+  const [preview, setPreview] = useState<string | null>(null)
+  const [fileError, setFileError] = useState(false)
 
   const getTomorrowDate = () => {
     const today = new Date()
@@ -37,15 +40,28 @@ const NewAuctionForm: FC<NewAuctionProps> = ({
     const yyyy = today.getFullYear()
     return `${yyyy}-${mm}-${dd}`
   }
-
   const tomorrowDate = getTomorrowDate()
+
+  const handleError = (message: string) => {
+    setApiError(message)
+    setShowError(true)
+  }
+
+  const isValidFile = (file: File | null) => {
+    const allowedTypes = ['image/jpeg', 'image/png', 'image/gif']
+    if (!file) return false
+    if (!allowedTypes.includes(file.type)) {
+      handleError('Invalid file type. Must be jpeg, png or gif')
+      return false
+    }
+    return true
+  }
 
   const onSubmit = handleSubmit(
     async (data: NewAuctionFields | AuctionType) => {
       const token = userStorage.getToken()
       if (!token) {
-        setApiError('no token')
-        setShowError(true)
+        handleError('No token found')
         return
       }
       if (!defaultValues) await handleAdd(data, token)
@@ -54,46 +70,99 @@ const NewAuctionForm: FC<NewAuctionProps> = ({
   )
 
   const handleAdd = async (data: NewAuctionFields, token: string) => {
-    const response = await API.uploadAuction(data, token)
-    if (response.data?.statusCode) {
-      setApiError(response.data.message)
-      setShowError(true)
-    } else {
+    try {
+      if (!file) {
+        handleError('Please upload an image.')
+        return
+      }
+      const response = await API.uploadAuction(data, token)
+      if (response.data?.statusCode) {
+        handleError(response.data.message)
+        return
+      }
+
+      // Upload image
+      const formData = new FormData()
+      formData.append('image', file as File, file?.name)
+      const imageResponse = await API.uploadImage(formData, response.data.id)
+      if (imageResponse.data?.statusCode) {
+        handleError(imageResponse.data.message)
+        return
+      }
+
       navigate(`${routes.AUCTIONS}`)
       resetDefaultValues()
       toggleOverlay()
+    } catch (error) {
+      handleError('An error occurred while adding the auction.')
     }
   }
+
+  const handleFileError = () => {
+    if (!file) setFileError(true)
+    else setFileError(false)
+  }
+
+  const handleFileChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
+    if (target.files) {
+      const myfile = target.files[0]
+      setFile(myfile)
+    }
+  }
+
+  useEffect(() => {
+    if (file) {
+      const reader = new FileReader()
+      reader.onloadend = () => {
+        setPreview(reader.result as string)
+        setFileError(false)
+      }
+      reader.readAsDataURL(file)
+    } else {
+      setPreview(null)
+    }
+  }, [file])
 
   const handleUpdate = async (
     data: NewAuctionFields,
     id: string,
     token: string,
   ) => {
-    const response = await API.updateAuction(
-      {
-        title: data.title,
-        description: data.description,
-        end_date: data.end_date,
-        image: data.image,
-        starting_price: data.starting_price,
-      },
-      id,
-      token,
-    )
-    if (response.data?.statusCode) {
-      setApiError(response.data.message)
-      setShowError(true)
-    } else {
+    try {
+      const response = await API.updateAuction(data, id, token)
+      if (response.data?.statusCode) {
+        handleError(response.data.message)
+        return
+      }
       navigate(`${routes.AUCTIONS}`)
       resetDefaultValues()
       toggleOverlay()
+    } catch (error) {
+      handleError('An error occurred while updating the auction.')
     }
   }
 
   return (
     <>
       <form className={styles.newAuctionCardInner} onSubmit={onSubmit}>
+        <div className={styles.newAuctionCardPicture}>
+          <label htmlFor="image" className={styles.addImageButton}>
+            Add image
+          </label>
+          <input
+            onChange={handleFileChange}
+            id="image"
+            name="image"
+            type="file"
+          />
+        </div>
+        {fileError && (
+          <div className={styles.error}>Please select a valid image file.</div>
+        )}
+        {preview && (
+          <img src={preview} alt="Preview" className={styles.imagePreview} />
+        )}
+
         <div className={styles.formGroupTitle}>
           <label className={styles.label} htmlFor="title">
             Title
@@ -190,7 +259,11 @@ const NewAuctionForm: FC<NewAuctionProps> = ({
           >
             Cancel
           </button>
-          <button className={styles.startAuctionButton} type="submit">
+          <button
+            className={styles.startAuctionButton}
+            type="submit"
+            onMouseUp={handleFileError}
+          >
             {defaultValues ? 'Update auction' : 'Start auction'}
           </button>
         </div>

@@ -23,6 +23,13 @@ export const uploadAuction = async (data: NewAuctionFields, token: string) => {
   return response.data
 }
 
+export const uploadImage = async (formData: FormData, id: string) =>
+  apiRequest<FormData, void>(
+    'post',
+    `${apiRoutes.UPLOAD_AUCTION_IMAGE}/${id}`,
+    formData,
+  )
+
 export const updateAuction = async (
   data: UpdateAuctionFields,
   id: string,
