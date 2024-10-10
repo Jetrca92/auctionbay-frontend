@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { FC } from 'react'
 import { observer } from 'mobx-react'
 import styles from 'styles/scss/Auction.module.scss'
 import { useNavigate } from 'react-router-dom'
@@ -12,23 +12,21 @@ import {
   NewBidFields,
   useCreateNewBid,
 } from 'hooks/react-hook-form/useCreateNewBid'
+import { errorStore } from 'stores/error.store'
 
 interface NewBidProps {
   auction: AuctionType
 }
 
 const NewBidForm: FC<NewBidProps> = ({ auction }) => {
+  errorStore.clearError()
   const navigate = useNavigate()
-
   const { handleSubmit, errors, control } = useCreateNewBid({ auction })
-  const [apiError, setApiError] = useState('')
-  const [showError, setShowError] = useState(false)
 
   const onSubmit = handleSubmit(async (data: NewBidFields) => {
     const token = userStorage.getToken()
     if (!token) {
-      setApiError('no token')
-      setShowError(true)
+      errorStore.setError('no token')
       return
     }
     await handleAdd(data, auction.id, token)
@@ -38,8 +36,7 @@ const NewBidForm: FC<NewBidProps> = ({ auction }) => {
     const response = await API.uploadBid(data, id, token)
 
     if (response.data?.statusCode) {
-      setApiError(response.data.message)
-      setShowError(true)
+      errorStore.setError(response.data.message)
     } else {
       const response = await API.fetchAuction(auction.id)
       const newAuction = response?.data
@@ -82,7 +79,9 @@ const NewBidForm: FC<NewBidProps> = ({ auction }) => {
           </button>
         )}
       </form>
-      {showError && <div className="error">{apiError}</div>}
+      {errorStore.showError && (
+        <div className="error">{errorStore.apiError}</div>
+      )}
     </>
   )
 }

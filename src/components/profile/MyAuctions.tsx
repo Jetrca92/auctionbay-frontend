@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { FC } from 'react'
 import styles from 'styles/scss/MyAuctions.module.scss'
 import timeIcon from 'styles/images/time.png'
 import trash from 'styles/images/trash.png'
@@ -12,11 +12,12 @@ import { useOverlay } from 'components/overlays/OverlayContext'
 import { routes } from 'constants/routesConstants'
 import { Link } from 'react-router-dom'
 import noImage from 'styles/images/empty-image.png'
+import { AxiosError } from 'axios'
+import { errorStore } from 'stores/error.store'
 
 const MyAuctions: FC = () => {
+  errorStore.clearError()
   const token = userStorage.getToken()
-  const [apiError, setApiError] = useState('')
-  const [showError, setShowError] = useState(false)
   const { toggleOverlay } = useOverlay()
 
   const { data, isLoading, refetch } = useQuery(
@@ -30,13 +31,11 @@ const MyAuctions: FC = () => {
     {
       keepPreviousData: true,
       refetchOnWindowFocus: false,
-      onError: (error: any) => {
+      onError: (error: AxiosError) => {
         if (error.response?.status === StatusCode.UNAUTHORIZED) {
-          setApiError('You are not authenticated. Please log in.')
-          setShowError(true)
+          errorStore.setError('You are not authenticated. Please log in.')
         } else {
-          setApiError('An error occurred while fetching auctions.')
-          setShowError(true)
+          errorStore.setError('An error occurred while fetching auctions.')
         }
       },
     },
@@ -48,28 +47,24 @@ const MyAuctions: FC = () => {
     {
       onSuccess: (response) => {
         if (response.data?.statusCode === StatusCode.BAD_REQUEST) {
-          setApiError(response.data.message)
-          setShowError(true)
+          errorStore.setError(response.data.message)
         } else if (
           response.data?.statusCode === StatusCode.INTERNAL_SERVER_ERROR
         ) {
-          setApiError(response.data.message)
-          setShowError(true)
+          errorStore.setError(response.data.message)
         } else {
           refetch()
         }
       },
       onError: () => {
-        setApiError('Something went wrong while deleting a product.')
-        setShowError(true)
+        errorStore.setError('Something went wrong while deleting a product.')
       },
     },
   )
 
   const handleDelete = (id: string) => {
     if (!token) {
-      setApiError('You are not authenticated.')
-      setShowError(true)
+      errorStore.setError('You are not authenticated.')
       return
     }
     mutate({ id, token })
@@ -94,11 +89,11 @@ const MyAuctions: FC = () => {
       </div>
     )
 
-  if (showError) {
+  if (errorStore.showError) {
     return (
       <div className={styles.emptyBody}>
         <div className={styles.emptyStateContainer}>
-          <div className={styles.error}>{apiError}</div>
+          <div className={styles.error}>{errorStore.apiError}</div>
         </div>
       </div>
     )

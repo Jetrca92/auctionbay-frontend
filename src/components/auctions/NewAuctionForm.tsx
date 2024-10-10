@@ -12,6 +12,7 @@ import {
 import { userStorage } from 'utils/localStorage'
 import { useOverlay } from 'components/overlays/OverlayContext'
 import { AuctionType } from 'models/auction'
+import { errorStore } from 'stores/error.store'
 
 interface NewAuctionProps {
   toggleOverlay: () => void
@@ -22,10 +23,9 @@ const NewAuctionForm: FC<NewAuctionProps> = ({
   toggleOverlay,
   defaultValues,
 }) => {
+  errorStore.clearError()
   const navigate = useNavigate()
   const { handleSubmit, errors, control } = useNewAuctionForm({ defaultValues })
-  const [apiError, setApiError] = useState('')
-  const [showError, setShowError] = useState(false)
   const { resetDefaultValues } = useOverlay()
 
   const [file, setFile] = useState<File | null>(null)
@@ -42,16 +42,11 @@ const NewAuctionForm: FC<NewAuctionProps> = ({
   }
   const tomorrowDate = getTomorrowDate()
 
-  const handleError = (message: string) => {
-    setApiError(message)
-    setShowError(true)
-  }
-
   const isValidFile = (file: File | null) => {
     const allowedTypes = ['image/jpeg', 'image/png', 'image/gif']
     if (!file) return false
     if (!allowedTypes.includes(file.type)) {
-      handleError('Invalid file type. Must be jpeg, png or gif')
+      errorStore.setError('Invalid file type. Must be jpeg, png or gif')
       return false
     }
     return true
@@ -61,7 +56,7 @@ const NewAuctionForm: FC<NewAuctionProps> = ({
     async (data: NewAuctionFields | AuctionType) => {
       const token = userStorage.getToken()
       if (!token) {
-        handleError('No token found')
+        errorStore.setError('No token found')
         return
       }
       if (!defaultValues) await handleAdd(data, token)
@@ -72,13 +67,13 @@ const NewAuctionForm: FC<NewAuctionProps> = ({
   const handleAdd = async (data: NewAuctionFields, token: string) => {
     try {
       if (!file) {
-        handleError('Please upload an image.')
+        errorStore.setError('Please upload an image.')
         return
       }
       const response = await API.uploadAuction(data, token)
       console.log('Auction upload response:', response.id)
       if (response.data?.statusCode) {
-        handleError(response.data.message)
+        errorStore.setError(response.data.message)
         return
       }
 
@@ -90,7 +85,7 @@ const NewAuctionForm: FC<NewAuctionProps> = ({
       const imageResponse = await API.uploadImage(formData, response?.id)
       console.log('Image upload response:', imageResponse)
       if (imageResponse.data?.statusCode) {
-        handleError(imageResponse.data.message)
+        errorStore.setError(imageResponse.data.message)
         return
       }
 
@@ -98,7 +93,7 @@ const NewAuctionForm: FC<NewAuctionProps> = ({
       resetDefaultValues()
       toggleOverlay()
     } catch (error) {
-      handleError('An error occurred while adding the auction.')
+      errorStore.setError('An error occurred while adding the auction.')
     }
   }
 
@@ -133,14 +128,14 @@ const NewAuctionForm: FC<NewAuctionProps> = ({
     try {
       const response = await API.updateAuction(data, id, token)
       if (response.data?.statusCode) {
-        handleError(response.data.message)
+        errorStore.setError(response.data.message)
         return
       }
       navigate(`${routes.AUCTIONS}`)
       resetDefaultValues()
       toggleOverlay()
     } catch (error) {
-      handleError('An error occurred while updating the auction.')
+      errorStore.setError('An error occurred while updating the auction.')
     }
   }
 
@@ -273,7 +268,9 @@ const NewAuctionForm: FC<NewAuctionProps> = ({
           </button>
         </div>
       </form>
-      {showError && <div className={styles.error}>{apiError}</div>}
+      {errorStore.showError && (
+        <div className={styles.error}>{errorStore.apiError}</div>
+      )}
     </>
   )
 }

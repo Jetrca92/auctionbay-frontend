@@ -3,14 +3,6 @@ import { Route, RouteProps, Routes as Switch } from 'react-router-dom'
 
 import PrivateRoute from './PrivateRoute'
 import RestrictedRoute from './RestrictedRoute'
-import Login from 'pages/Login'
-import Register from 'pages/Register'
-import ForgotPassword from 'pages/ForgotPassword'
-import Profile from 'pages/Profile'
-import Bidding from 'pages/Bidding'
-import Won from 'pages/Won'
-import Auctions from 'pages/Auctions'
-import Auction from 'pages/Auction'
 
 export enum RouteType {
   PUBLIC,
@@ -24,10 +16,18 @@ type AppRoute = RouteProps & {
 
 /* Public routes */
 const LandingPage = lazy(() => import('pages/LandingPage'))
+const ForgotPassword = lazy(() => import('pages/ForgotPassword'))
 
 /* Private routes */
+const Profile = lazy(() => import('pages/Profile'))
+const Bidding = lazy(() => import('pages/Bidding'))
+const Won = lazy(() => import('pages/Won'))
+const Auctions = lazy(() => import('pages/Auctions'))
+const Auction = lazy(() => import('pages/Auction'))
 
 /* Restricted routes */
+const Login = lazy(() => import('pages/Login'))
+const Register = lazy(() => import('pages/Register'))
 
 /* Error routes */
 const Page404 = lazy(() => import('pages/Page404'))

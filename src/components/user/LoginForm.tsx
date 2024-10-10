@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { FC } from 'react'
 import { observer } from 'mobx-react'
 import styles from 'styles/scss/Authentication.module.scss'
 import { Link, useNavigate } from 'react-router-dom'
@@ -7,18 +7,18 @@ import { LoginUserFields, useLoginForm } from 'hooks/react-hook-form/useLogin'
 import * as API from 'api/Api'
 import authStore from 'stores/auth.store'
 import { Controller } from 'react-hook-form'
+import { errorStore } from 'stores/error.store'
 
 const LoginForm: FC = () => {
+  errorStore.clearError()
   const navigate = useNavigate()
   const { handleSubmit, errors, control } = useLoginForm()
-  const [apiError, setApiError] = useState('')
-  const [showError, setShowError] = useState(false)
 
   const onSubmit = handleSubmit(async (data: LoginUserFields) => {
     const response = await API.login(data)
     if (response.data?.statusCode) {
-      setApiError(response.data.message)
-      setShowError(true)
+      errorStore.setError(response.data.message)
+
       return
     }
     try {
@@ -26,8 +26,7 @@ const LoginForm: FC = () => {
       authStore.login(user, response.data)
       navigate('/')
     } catch (error) {
-      setApiError('Failed to fetch user information')
-      setShowError(true)
+      errorStore.setError('Failed to fetch user information')
     }
   })
 
@@ -100,7 +99,9 @@ const LoginForm: FC = () => {
             Login
           </button>
         </form>
-        {showError && <div className={styles.error}>{apiError}</div>}
+        {errorStore.showError && (
+          <div className={styles.error}>{errorStore.apiError}</div>
+        )}
       </div>
     </>
   )
