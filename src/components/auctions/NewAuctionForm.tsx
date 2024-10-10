@@ -76,6 +76,7 @@ const NewAuctionForm: FC<NewAuctionProps> = ({
         return
       }
       const response = await API.uploadAuction(data, token)
+      console.log('Auction upload response:', response.id)
       if (response.data?.statusCode) {
         handleError(response.data.message)
         return
@@ -84,7 +85,10 @@ const NewAuctionForm: FC<NewAuctionProps> = ({
       // Upload image
       const formData = new FormData()
       formData.append('image', file as File, file?.name)
-      const imageResponse = await API.uploadImage(formData, response.data.id)
+      console.log(file)
+
+      const imageResponse = await API.uploadImage(formData, response?.id)
+      console.log('Image upload response:', imageResponse)
       if (imageResponse.data?.statusCode) {
         handleError(imageResponse.data.message)
         return
@@ -106,21 +110,19 @@ const NewAuctionForm: FC<NewAuctionProps> = ({
   const handleFileChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
     if (target.files) {
       const myfile = target.files[0]
+      if (!isValidFile(myfile)) return
       setFile(myfile)
     }
   }
 
   useEffect(() => {
-    if (file) {
-      const reader = new FileReader()
-      reader.onloadend = () => {
-        setPreview(reader.result as string)
-        setFileError(false)
-      }
-      reader.readAsDataURL(file)
-    } else {
+    if (!file) {
       setPreview(null)
+      return
     }
+    const reader = new FileReader()
+    reader.onloadend = () => setPreview(reader.result as string)
+    reader.readAsDataURL(file)
   }, [file])
 
   const handleUpdate = async (
@@ -146,21 +148,24 @@ const NewAuctionForm: FC<NewAuctionProps> = ({
     <>
       <form className={styles.newAuctionCardInner} onSubmit={onSubmit}>
         <div className={styles.newAuctionCardPicture}>
-          <label htmlFor="image" className={styles.addImageButton}>
-            Add image
-          </label>
-          <input
-            onChange={handleFileChange}
-            id="image"
-            name="image"
-            type="file"
-          />
+          {preview ? (
+            <img src={preview} alt="Preview" className={styles.imagePreview} />
+          ) : (
+            <>
+              <label htmlFor="image" className={styles.addImageButton}>
+                Add image
+              </label>
+              <input
+                onChange={handleFileChange}
+                id="image"
+                name="image"
+                type="file"
+              />
+            </>
+          )}
         </div>
         {fileError && (
           <div className={styles.error}>Please select a valid image file.</div>
-        )}
-        {preview && (
-          <img src={preview} alt="Preview" className={styles.imagePreview} />
         )}
 
         <div className={styles.formGroupTitle}>

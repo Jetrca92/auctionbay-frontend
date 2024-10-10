@@ -31,7 +31,7 @@ const AuctionContent: FC<AuctionCardProps> = ({ auction }) => {
         {auction &&
           (auction.image ? (
             <img
-              src={auction.image}
+              src={`http://localhost:8080/${auction.image}`}
               className={styles.image}
               alt="auctionImage"
             />

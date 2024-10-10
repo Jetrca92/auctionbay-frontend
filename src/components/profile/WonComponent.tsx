@@ -71,7 +71,7 @@ const WonComponent: FC = () => {
           <div className={styles.imageContainer}>
             {auction.image ? (
               <img
-                src={auction.image}
+                src={`http://localhost:8080${auction.image}`}
                 alt={auction.title}
                 className={styles.image}
               />

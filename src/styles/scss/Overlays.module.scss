@@ -32,7 +32,6 @@
 .newAuctionCardPicture {
   width: 501px;
   height: 168px;
-  padding: 32px;
   border-radius: 16px;
   background: #f6f6f4;
   display: flex;
@@ -68,6 +67,14 @@
   font-size: 15px;
   font-weight: 500;
   line-height: 24px;
+}
+
+.imagePreview {
+  width: 501px;
+  height: 168px;
+  gap: 8px;
+  border-radius: 16px;
+  object-fit: cover;
 }
 
 .addImageButton:hover {
