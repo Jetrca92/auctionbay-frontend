@@ -314,3 +314,57 @@
   color: #071015;
   background-color: #ffffff;
 }
+
+.changePasswordContainer {
+  display: flex;
+  flex-direction: column;
+  width: 533px;
+  height: 414px;
+  padding: 16px;
+  gap: 32px;
+  border-radius: 16px;
+  background: #ffffff;
+}
+
+.changePasswordTitle {
+  width: 501px;
+  height: 28px;
+  font-size: 23px;
+  font-weight: 700;
+  line-height: 27.6px;
+}
+
+.changePasswordForm {
+  display: flex;
+  flex-direction: column;
+  width: 501px;
+  height: 322px;
+  gap: 17px;
+}
+
+.changePasswordFormInputs {
+  display: flex;
+  flex-direction: column;
+  width: 501px;
+  height: 250px;
+  gap: 17px;
+}
+
+.changePasswordFormBottomBar {
+  display: flex;
+  justify-content: end;
+  width: 501px;
+  height: 40px;
+  gap: 16px;
+}
+
+.cancelButton {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+.startAuctionButton {
+  @extend .cancelButton;
+  background: #f4ff47;
+}

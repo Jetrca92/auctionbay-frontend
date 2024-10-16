@@ -123,7 +123,7 @@ const Navbar: FC<NavbarProps> = ({
             <div className={styles.signupDiv}>
               <Link className="nav-link" to={routes.LOGIN}>
                 <b>Log in</b>
-              </Link>{' '}
+              </Link>
               or
               <Link className={styles.signupButton} to={routes.SIGNUP}>
                 Sign up

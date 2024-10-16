@@ -1,8 +1,9 @@
 import { FC, lazy, Suspense } from 'react'
 import { Route, RouteProps, Routes as Switch } from 'react-router-dom'
-
+import { OverlayType } from 'components/overlays/OverlayContext'
 import PrivateRoute from './PrivateRoute'
 import RestrictedRoute from './RestrictedRoute'
+import ChangePassword from 'pages/ChangePassword'
 
 export enum RouteType {
   PUBLIC,
@@ -81,21 +82,22 @@ export const AppRoutes: AppRoute[] = [
     path: '/auction/:id',
     children: <Auction />,
   },
+  {
+    type: RouteType.PRIVATE,
+    path: '/profile/update-password',
+    children: <ChangePassword />,
+  },
 ]
 
 interface RoutesProps {
-  isOverlayVisible: boolean
-  isNotificationVisible: boolean
-  isUserOptionsVisible: boolean
+  activeOverlay: OverlayType
   toggleOverlay: () => void
   toggleNotification: () => void
   toggleUserOptions: () => void
 }
 
 const Routes: FC<RoutesProps> = ({
-  isOverlayVisible,
-  isNotificationVisible,
-  isUserOptionsVisible,
+  activeOverlay,
   toggleOverlay,
   toggleNotification,
   toggleUserOptions,

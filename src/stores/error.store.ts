@@ -1,4 +1,4 @@
-import { makeAutoObservable } from 'mobx'
+import { makeAutoObservable, action } from 'mobx'
 
 class ErrorStore {
   apiError = ''
@@ -8,15 +8,15 @@ class ErrorStore {
     makeAutoObservable(this)
   }
 
-  setError(message: string) {
+  setError = action((message: string) => {
     this.apiError = message
     this.showError = true
-  }
+  })
 
-  clearError() {
+  clearError = action(() => {
     this.apiError = ''
     this.showError = false
-  }
+  })
 }
 
 export const errorStore = new ErrorStore()

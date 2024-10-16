@@ -12,11 +12,9 @@ interface Props {
 
 const Layout: FC<Props> = ({ children }) => {
   const {
-    isOverlayVisible,
+    activeOverlay,
     toggleOverlay,
-    isNotificationVisible,
     toggleNotification,
-    isUserOptionsVisible,
     toggleUserOptions,
   } = useOverlay()
 
@@ -28,9 +26,16 @@ const Layout: FC<Props> = ({ children }) => {
         toggleUserOptions={toggleUserOptions}
       />
 
-      {isOverlayVisible ? <NewAuction /> : <div>{children}</div>}
-      {isNotificationVisible ? <Notification /> : <div>{children}</div>}
-      {isUserOptionsVisible ? <UserOptions /> : <div>{children}</div>}
+      {activeOverlay === 'auction' ? (
+        <NewAuction />
+      ) : (
+        <>
+          {activeOverlay === 'notification' && <Notification />}
+          {activeOverlay === 'userOptions' && <UserOptions />}
+          {children}
+        </>
+      )}
+
       <Footer />
     </>
   )

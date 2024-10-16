@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import { observer } from 'mobx-react'
 import styles from 'styles/scss/Authentication.module.scss'
 import { Link, useNavigate } from 'react-router-dom'
@@ -10,9 +10,12 @@ import { Controller } from 'react-hook-form'
 import { errorStore } from 'stores/error.store'
 
 const LoginForm: FC = () => {
-  errorStore.clearError()
   const navigate = useNavigate()
   const { handleSubmit, errors, control } = useLoginForm()
+
+  useEffect(() => {
+    errorStore.clearError()
+  }, [])
 
   const onSubmit = handleSubmit(async (data: LoginUserFields) => {
     const response = await API.login(data)

@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import styles from 'styles/scss/MyAuctions.module.scss'
 import timeIcon from 'styles/images/time.png'
 import trash from 'styles/images/trash.png'
@@ -16,9 +16,12 @@ import { AxiosError } from 'axios'
 import { errorStore } from 'stores/error.store'
 
 const MyAuctions: FC = () => {
-  errorStore.clearError()
   const token = userStorage.getToken()
   const { toggleOverlay } = useOverlay()
+
+  useEffect(() => {
+    errorStore.clearError()
+  }, [])
 
   const { data, isLoading, refetch } = useQuery(
     ['fetchUserAuctions'],
