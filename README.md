@@ -1,12 +1,5 @@
 # Welcome to Auctionbay frontend 👋
 
-## Table of Contents
-
-- [Overview](#overview)
-- [Install](#install)
-- [Tools](#tools)
-- [Disclaimer](#disclaimer)
-
 # AuctionBay - frontend
 
 ## Overview
