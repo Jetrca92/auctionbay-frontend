@@ -4,13 +4,22 @@ import { observer } from 'mobx-react'
 
 const App: FC = () => {
   const [isOverlayVisible, setIsOverlayVisible] = useState(false)
+  const [isNotificationVisible, setIsNotificationVisible] = useState(false)
 
   const toggleOverlay = () => {
     setIsOverlayVisible(!isOverlayVisible)
   }
+  const toggleNotification = () => {
+    setIsNotificationVisible(!isNotificationVisible)
+  }
 
   return (
-    <Routes isOverlayVisible={isOverlayVisible} toggleOverlay={toggleOverlay} />
+    <Routes
+      isOverlayVisible={isOverlayVisible}
+      isNotificationVisible={isNotificationVisible}
+      toggleOverlay={toggleOverlay}
+      toggleNotification={toggleNotification}
+    />
   )
 }
 

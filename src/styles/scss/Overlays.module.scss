@@ -167,3 +167,96 @@
   background-size: 12px;
   background-position: calc(100% - 16px) center;
 }
+
+.notificationsContainer {
+  position: absolute;
+  width: 442px;
+  height: auto;
+  top: 100px;
+  right: 80px;
+  padding: 16px;
+  gap: 16px;
+  border-radius: 16px;
+  background: #ffffff;
+}
+
+.notificationsHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 410px;
+  height: 40px;
+  gap: 16px;
+}
+
+.notificationsEmptyMessage {
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 24px;
+  color: #74817f;
+}
+
+.notificationsHeaderText {
+  font-size: 23px;
+  font-weight: 700;
+  line-height: 27.6px;
+}
+
+.notificationsHeaderButton {
+  width: 94px;
+  height: 40px;
+  min-height: 40px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+.notificationComponentContainer {
+  width: 410px;
+  height: 40px;
+  gap: 8px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.notificationComponentInner {
+  display: flex;
+  align-items: center;
+  width: 410px;
+  height: 40px;
+  gap: 8px;
+}
+
+.notificationComponentImage {
+  object-fit: cover;
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+}
+
+.notificationComponentTitle {
+  display: flex;
+  flex-direction: column;
+  width: 236px;
+  height: 36px;
+}
+
+.notificationComponentTitleMain {
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 24px;
+  color: #071015;
+}
+
+.notificationComponentTitleDate {
+  font-size: 10px;
+  font-weight: 300;
+  line-height: 12px;
+  color: #74817f;
+}
+
+.notificationStatusTag {
+  display: flex;
+  width: 49px;
+  height: 28px;
+}

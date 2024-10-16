@@ -6,6 +6,7 @@ import {
   UpdateAuctionFields,
 } from 'hooks/react-hook-form/useNewAuction'
 import { AxiosHeaders, AxiosRequestHeaders } from 'axios'
+import { NotificationType } from 'models/notification'
 
 export const uploadAuction = async (data: NewAuctionFields, token: string) => {
   const headers: AxiosRequestHeaders = AxiosHeaders.from({
@@ -85,6 +86,38 @@ export const fetchUserAuctions = async (token: string) => {
   const response = await apiRequest<void, AuctionType[]>(
     'get',
     apiRoutes.FETCH_USER_AUCTIONS,
+    undefined,
+    {
+      headers: headers,
+    },
+  )
+  return response
+}
+
+export const fetchUserNotifications = async (token: string) => {
+  const headers: AxiosRequestHeaders = AxiosHeaders.from({
+    Authorization: `Bearer ${token}`,
+    'Content-Type': 'application/json',
+  })
+  const response = await apiRequest<void, NotificationType[]>(
+    'get',
+    apiRoutes.FETCH_USER_NOTIFICATIONS,
+    undefined,
+    {
+      headers: headers,
+    },
+  )
+  return response
+}
+
+export const setUserNotificationAsRead = async (token: string, id: string) => {
+  const headers: AxiosRequestHeaders = AxiosHeaders.from({
+    Authorization: `Bearer ${token}`,
+    'Content-Type': 'application/json',
+  })
+  const response = await apiRequest<void, NotificationType>(
+    'patch',
+    `${apiRoutes.FETCH_USER_NOTIFICATIONS}/${id}/read`,
     undefined,
     {
       headers: headers,

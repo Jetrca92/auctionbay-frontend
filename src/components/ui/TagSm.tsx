@@ -7,22 +7,28 @@ interface Props {
 
 const TagSm: FC<Props> = ({ children }) => {
   let backgroundColor = ''
-  let color = ''
+  let color = '#071015'
 
   if (typeof children === 'string') {
-    switch (children.toLowerCase()) {
-      case 'outbid':
-        backgroundColor = '#FFAA98'
-        break
-      case 'winning':
-        backgroundColor = '#ADFF90'
-        break
-      case 'in progress':
-        backgroundColor = '#F9FF90'
-        break
-      case 'done':
-        backgroundColor = '#272D2D'
-        color = '#FFFFFF'
+    if (children.toLowerCase().includes('eur')) {
+      backgroundColor = '#272D2D'
+      color = '#FFFFFF'
+    } else {
+      switch (children.toLowerCase()) {
+        case 'outbid':
+          backgroundColor = '#FFAA98'
+          break
+        case 'winning':
+        case 'won':
+          backgroundColor = '#ADFF90'
+          break
+        case 'in progress':
+          backgroundColor = '#F9FF90'
+          break
+        case 'done':
+          backgroundColor = '#272D2D'
+          color = '#FFFFFF'
+      }
     }
   }
 
