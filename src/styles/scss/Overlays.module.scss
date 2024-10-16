@@ -260,3 +260,57 @@
   width: 49px;
   height: 28px;
 }
+
+.userOptionsContainer {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  width: 204px;
+  height: 129px;
+  top: 100px;
+  right: 110px;
+  padding: 16px;
+  gap: 17px;
+  border-radius: 16px;
+  box-shadow: 0px 0px 0px 0px #0000001a;
+  box-shadow: 0px 4px 8px 0px #0000001a;
+  box-shadow: 0px 15px 15px 0px #00000017;
+  box-shadow: 0px 34px 21px 0px #0000000d;
+  box-shadow: 0px 61px 24px 0px #00000003;
+  box-shadow: 0px 96px 27px 0px #00000000;
+  background-color: #ffffff;
+}
+
+.userOptionsButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 172px;
+  height: 40px;
+  min-height: 40px;
+  padding: 8px 16px 8px 16px;
+  gap: 8px;
+  border-radius: 16px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  cursor: pointer;
+}
+
+.userOptionsButtonIcon {
+  width: 16px;
+  height: 16px;
+  padding: 1.33px 1.52px 1.33px 1.51px;
+}
+
+.userLogoutButton {
+  width: 172px;
+  height: 40px;
+  min-height: 40px;
+  border: 1px solid #272d2d;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  color: #071015;
+  background-color: #ffffff;
+}

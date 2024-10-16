@@ -8,6 +8,8 @@ interface OverlayContextType {
   defaultValues?: AuctionType
   isNotificationVisible: boolean
   toggleNotification: () => void
+  isUserOptionsVisible: boolean
+  toggleUserOptions: () => void
 }
 
 const OverlayContext = createContext<OverlayContextType | undefined>(undefined)
@@ -20,6 +22,7 @@ export const OverlayProvider: React.FC<{ children: ReactNode }> = ({
     undefined,
   )
   const [isNotificationVisible, setIsNotificationVisible] = useState(false)
+  const [isUserOptionsVisible, setIsUserOptionsVisible] = useState(false)
 
   const toggleOverlay = (newDefaultValues?: AuctionType, id?: string) => {
     setDefaultValues(newDefaultValues)
@@ -34,6 +37,10 @@ export const OverlayProvider: React.FC<{ children: ReactNode }> = ({
     setIsNotificationVisible((prev) => !prev)
   }
 
+  const toggleUserOptions = () => {
+    setIsUserOptionsVisible((prev) => !prev)
+  }
+
   return (
     <OverlayContext.Provider
       value={{
@@ -43,6 +50,8 @@ export const OverlayProvider: React.FC<{ children: ReactNode }> = ({
         defaultValues,
         isNotificationVisible,
         toggleNotification,
+        isUserOptionsVisible,
+        toggleUserOptions,
       }}
     >
       {children}

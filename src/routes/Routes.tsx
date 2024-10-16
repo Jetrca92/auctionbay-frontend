@@ -86,15 +86,19 @@ export const AppRoutes: AppRoute[] = [
 interface RoutesProps {
   isOverlayVisible: boolean
   isNotificationVisible: boolean
+  isUserOptionsVisible: boolean
   toggleOverlay: () => void
   toggleNotification: () => void
+  toggleUserOptions: () => void
 }
 
 const Routes: FC<RoutesProps> = ({
   isOverlayVisible,
   isNotificationVisible,
+  isUserOptionsVisible,
   toggleOverlay,
   toggleNotification,
+  toggleUserOptions,
 }) => {
   return (
     <Suspense fallback={<div>Loading...</div>}>

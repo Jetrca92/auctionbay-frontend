@@ -14,9 +14,14 @@ import authStore from 'stores/auth.store'
 interface NavbarProps {
   toggleOverlay: () => void
   toggleNotification: () => void
+  toggleUserOptions: () => void
 }
 
-const Navbar: FC<NavbarProps> = ({ toggleOverlay, toggleNotification }) => {
+const Navbar: FC<NavbarProps> = ({
+  toggleOverlay,
+  toggleNotification,
+  toggleUserOptions,
+}) => {
   const location = useLocation()
   const [activeTab, setActiveTab] = useState('')
 
@@ -102,7 +107,10 @@ const Navbar: FC<NavbarProps> = ({ toggleOverlay, toggleNotification }) => {
               >
                 <img src={addIcon} alt="add" />
               </div>
-              <div className={styles.ctaButton1}>
+              <div
+                className={styles.ctaButton1}
+                onClick={() => toggleUserOptions()}
+              >
                 <img src={personIcon} alt="person" />
               </div>
             </div>
