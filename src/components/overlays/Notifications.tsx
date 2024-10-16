@@ -41,7 +41,6 @@ const Notification: FC = () => {
         API.setUserNotificationAsRead(token, notification.id),
       ),
     )
-    toggleNotification()
     refetch()
   }
 
@@ -57,7 +56,10 @@ const Notification: FC = () => {
       <div className={styles.notificationsContainer}>
         <div className={styles.notificationsHeader}>
           <h4 className={styles.notificationsHeaderText}>Notifications</h4>
-          <button className={styles.notificationsHeaderButton}>
+          <button
+            className={styles.notificationsHeaderButton}
+            onClick={() => toggleNotification()}
+          >
             Clear all
           </button>
         </div>
@@ -91,7 +93,7 @@ const Notification: FC = () => {
           <h4 className={styles.notificationsHeaderText}>Notifications</h4>
           <button
             className={styles.notificationsHeaderButton}
-            onClick={() => markAllNotificationsAsRead()}
+            onClick={() => toggleNotification()}
           >
             Clear all
           </button>
@@ -109,7 +111,10 @@ const Notification: FC = () => {
         <h4 className={styles.notificationsHeaderText}>Notifications</h4>
         <button
           className={styles.notificationsHeaderButton}
-          onClick={markAllNotificationsAsRead}
+          onClick={() => {
+            markAllNotificationsAsRead()
+            toggleNotification()
+          }}
         >
           Clear all
         </button>

@@ -8,6 +8,7 @@ import TagSm from 'components/ui/TagSm'
 import { getMinBidAmount } from 'models/auction'
 import { setUserNotificationAsRead } from 'api/Auction'
 import { userStorage } from 'utils/localStorage'
+import { useOverlay } from './OverlayContext'
 
 interface NotificationComponentProps {
   notification: NotificationType
@@ -17,9 +18,11 @@ interface NotificationComponentProps {
 const NotificationComponent: FC<NotificationComponentProps> = ({
   notification,
 }) => {
+  const { toggleNotification } = useOverlay()
   if (!notification) return <></>
   const token = userStorage.getToken()
   if (!token) return null
+
   const formatDate = (dateString: string) => {
     const date = new Date(dateString)
     const day = String(date.getDate())
@@ -36,7 +39,10 @@ const NotificationComponent: FC<NotificationComponentProps> = ({
     <Link
       className={styles.notificationComponentContainer}
       to={`${routes.AUCTION_PREFIX}/${notification.auction.id}`}
-      onClick={() => setUserNotificationAsRead(token, notification.id)}
+      onClick={() => {
+        setUserNotificationAsRead(token, notification.id)
+        toggleNotification()
+      }}
     >
       <div className={styles.notificationComponentInner}>
         {notification.auction.image ? (
