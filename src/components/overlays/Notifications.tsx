@@ -69,15 +69,19 @@ const Notification: FC = () => {
   }
 
   if (errorStore.showError) {
-    ;<div className={styles.notificationsContainer}>
-      <div className={styles.notificationsHeader}>
-        <h4 className={styles.notificationsHeaderText}>Notifications</h4>
-        <button className={styles.notificationsHeaderButton}>Clear all</button>
+    return (
+      <div className={styles.notificationsContainer}>
+        <div className={styles.notificationsHeader}>
+          <h4 className={styles.notificationsHeaderText}>Notifications</h4>
+          <button className={styles.notificationsHeaderButton}>
+            Clear all
+          </button>
+        </div>
+        <div className={styles.notificationsEmptyMessage}>
+          <div className={styles.error}>{errorStore.apiError}</div>
+        </div>
       </div>
-      <div className={styles.notificationsEmptyMessage}>
-        <div className={styles.error}>{errorStore.apiError}</div>
-      </div>
-    </div>
+    )
   }
 
   if (isLoading) {
