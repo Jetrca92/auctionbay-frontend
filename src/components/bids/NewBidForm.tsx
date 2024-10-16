@@ -40,8 +40,6 @@ const NewBidForm: FC<NewBidProps> = ({ auction }) => {
     } else {
       const response = await API.fetchAuction(auction.id)
       const newAuction = response?.data
-      console.log(response)
-      console.log(newAuction)
       navigate(`${routes.AUCTION_PREFIX}/${auction.id}`, {
         state: { newAuction },
       })

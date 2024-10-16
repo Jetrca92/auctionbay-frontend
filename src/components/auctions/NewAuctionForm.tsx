@@ -71,7 +71,6 @@ const NewAuctionForm: FC<NewAuctionProps> = ({
         return
       }
       const response = await API.uploadAuction(data, token)
-      console.log('Auction upload response:', response.id)
       if (response.data?.statusCode) {
         errorStore.setError(response.data.message)
         return
@@ -80,10 +79,8 @@ const NewAuctionForm: FC<NewAuctionProps> = ({
       // Upload image
       const formData = new FormData()
       formData.append('image', file as File, file?.name)
-      console.log(file)
 
       const imageResponse = await API.uploadImage(formData, response?.id)
-      console.log('Image upload response:', imageResponse)
       if (imageResponse.data?.statusCode) {
         errorStore.setError(imageResponse.data.message)
         return

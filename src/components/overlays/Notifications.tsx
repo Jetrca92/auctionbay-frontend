@@ -35,13 +35,13 @@ const Notification: FC = () => {
   const { toggleNotification } = useOverlay()
 
   const markAllNotificationsAsRead = async () => {
-    console.log('markAll called')
     if (!token || !data?.data.length) return
     await Promise.all(
       data.data.map((notification: NotificationType) =>
         API.setUserNotificationAsRead(token, notification.id),
       ),
     )
+    toggleNotification()
     refetch()
   }
 
