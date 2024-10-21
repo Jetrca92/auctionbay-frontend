@@ -1,0 +1,143 @@
+.navbar {
+  width: 1440px;
+  height: 104px;
+  padding: 20px 32px;
+  display: flex;
+  justify-content: space-between;
+  gap: 0px;
+}
+
+.logoDiv {
+  width: 64px;
+  height: 64px;
+  display: flex;
+}
+
+.signupButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 16px;
+  border: none;
+  background: var(--Gray-50, #272d2d);
+  width: 92px;
+  height: 40px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.signupDiv {
+  width: 172px;
+  height: 40px;
+  gap: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: left;
+  text-decoration: none;
+}
+
+.leftNavigation {
+  display: flex;
+  gap: 32px;
+}
+
+.navigationTab {
+  display: flex;
+  width: 251px;
+  height: 64px;
+  padding: 4px;
+  gap: 8px;
+  border-radius: 32px;
+  background: #ffffff;
+}
+
+.inactiveTab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 126px;
+  height: 56px;
+  padding: 8px 16px;
+  gap: 4px;
+  border-radius: 32px;
+  text-decoration: none;
+}
+
+.inactiveTabLabel {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 19.2px;
+  color: #071015;
+}
+
+.activeTabLabel {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 19.2px;
+  color: #ffffff;
+}
+
+.activeTab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 109px;
+  height: 56px;
+  padding: 8px 16px;
+  gap: 4px;
+  border-radius: 32px;
+  background: #272d2d;
+  text-decoration: none;
+}
+
+.activeIcon {
+  color: #ffffff;
+}
+
+.inactiveIcon {
+  color: #071015;
+}
+
+.navIcon {
+  height: 24px;
+  width: 24px;
+}
+
+.rightNavigation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 192px;
+  height: 64px;
+  padding: 4px;
+  gap: 8px;
+  border-radius: 32px;
+  background-color: #ffffff;
+}
+
+.ctaButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 56px;
+  height: 56px;
+  padding: 16px;
+  gap: 4px;
+  border-radius: 32px;
+  cursor: pointer;
+}
+
+.ctaButton1 {
+  @extend .ctaButton;
+  background: #edf4f2;
+}
+
+.ctaButton2 {
+  @extend .ctaButton;
+  background: #f4ff47;
+}

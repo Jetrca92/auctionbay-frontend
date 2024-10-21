@@ -1,0 +1,155 @@
+.auctionsBody {
+  display: flex;
+  flex-direction: column;
+  width: 1, 440px;
+  height: 920px;
+  padding: 16px 0px 0px 0px;
+  gap: 16px;
+}
+
+.titleComponent {
+  width: 1, 440px;
+  height: 38px;
+  padding: 0px 32px;
+  gap: 8px;
+}
+
+.titleTexth3 {
+  margin: 0px;
+}
+
+.auctionsContent {
+  display: flex;
+  flex-wrap: wrap;
+  width: 1, 440px;
+  height: 1, 080px;
+  padding: 0px 32px 32px 32px;
+  gap: 16px;
+}
+
+.emptyBody {
+  @extend .auctionsContent;
+  justify-content: center;
+  align-items: center;
+}
+
+.emptyStateContainer {
+  width: 300px;
+  height: 111px;
+  gap: 8px;
+}
+
+.captionTitle {
+  text-align: center;
+  height: 31px;
+}
+
+.caption {
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 24px;
+  text-align: center;
+  color: #74817f;
+}
+
+.card {
+  width: 216px;
+  height: 250px;
+  border-radius: 16px;
+  background: #ffffff;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  width: 216px;
+  height: 92px;
+  padding: 8px 8px 4px 8px;
+  gap: 8px;
+}
+
+.tagHeader {
+  width: 200px;
+  height: 16px;
+  gap: 0px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.tag {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 16px;
+  padding: 2px 4px;
+  gap: 8px;
+  border-radius: 8px;
+  background: #f9ff90;
+}
+
+.tagText {
+  font-size: 9px;
+  font-weight: 300;
+  line-height: 12px;
+}
+
+.timeTag {
+  display: flex;
+  justify-content: center;
+  width: 43px;
+  height: 16px;
+  padding: 2px 4px 2px 4px;
+  gap: 4px;
+  border-radius: 8px 0px 0px 0px;
+  font-size: 10px;
+  font-weight: 300;
+  line-height: 12px;
+}
+
+.timeIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 12px;
+  height: 12px;
+}
+
+.titleContainer {
+  width: 200px;
+  height: 24px;
+  gap: 0px;
+}
+
+.titleText {
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 24px;
+}
+
+.price {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+.imageContainer {
+  display: flex;
+  flex-direction: column;
+  width: 216px;
+  height: 158px;
+  padding: 4px;
+  gap: 8px;
+}
+
+.image {
+  width: 208px;
+  height: 150px;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.auctionCardLink {
+  text-decoration: none;
+  color: inherit;
+}

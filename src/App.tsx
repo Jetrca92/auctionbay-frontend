@@ -1,26 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { FC } from 'react'
+import Routes from 'routes/Routes'
+import { observer } from 'mobx-react'
+import { useOverlay } from 'components/overlays/OverlayContext'
 
-function App() {
+const App: FC = () => {
+  const {
+    activeOverlay,
+    toggleOverlay,
+    toggleNotification,
+    toggleUserOptions,
+  } = useOverlay()
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Routes
+      activeOverlay={activeOverlay}
+      toggleOverlay={toggleOverlay}
+      toggleNotification={toggleNotification}
+      toggleUserOptions={toggleUserOptions}
+    />
+  )
 }
 
-export default App;
+export default observer(App)

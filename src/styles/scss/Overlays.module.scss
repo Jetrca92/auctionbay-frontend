@@ -1,0 +1,370 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1, 440px;
+  height: 920px;
+  padding: 32px;
+}
+
+.newAuctionCard {
+  display: flex;
+  flex-direction: column;
+  width: 533px;
+  height: 647px;
+  top: 80px;
+  left: 80px;
+  padding: 16px;
+  gap: 16px;
+  border-radius: 16px;
+  background: #ffffff;
+}
+
+.newAuctionCardHeader {
+  width: 501px;
+  height: 28px;
+}
+
+#image {
+  display: none;
+}
+
+.newAuctionCardPicture {
+  width: 501px;
+  height: 168px;
+  border-radius: 16px;
+  background: #f6f6f4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.newAuctionCardInner {
+  display: flex;
+  flex-direction: column;
+  width: 501px;
+  height: 571px;
+  gap: 16px;
+}
+
+.newAuctionCardBottomBar {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  width: 501px;
+  height: 40px;
+  gap: 16px;
+}
+
+.addImageButton {
+  width: 114px;
+  height: 40px;
+  min-height: 40px;
+  padding: 8px 16px 8px 16px;
+  border-radius: 16px;
+  border: 1px solid #272d2d;
+  color: #071015;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+.imagePreview {
+  width: 501px;
+  height: 168px;
+  gap: 8px;
+  border-radius: 16px;
+  object-fit: cover;
+}
+
+.addImageButton:hover {
+  cursor: pointer;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.formGroupTitle {
+  @extend .formGroup;
+  width: 501px;
+  height: 72px;
+}
+
+.formLabel {
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 24px;
+  background: #071015;
+}
+
+.formInput {
+  padding: 8px 16px;
+  gap: 8px;
+  border-radius: 16px;
+  border: 1px solid #dde9e6;
+}
+
+.formInputTitle {
+  @extend .formInput;
+  width: 501px;
+  height: 40px;
+}
+
+.formGroupDescription {
+  @extend .formGroup;
+  width: 501px;
+  height: 155px;
+}
+
+.formInputDescription {
+  @extend .formInput;
+  width: 501px;
+  height: 123px;
+}
+
+.error {
+  color: white;
+  background-color: red;
+}
+
+.formGroupSbs {
+  display: flex;
+  width: 501px;
+  height: 72px;
+  gap: 16px;
+}
+
+.formGroupStartingPrice {
+  @extend .formGroup;
+  width: 242.5px;
+  height: 72px;
+  gap: 8px;
+}
+
+.formInputStartingPrice {
+  @extend .formInput;
+  width: 242.5px;
+  height: 40px;
+  background: url('../images/euroIcon.png') no-repeat right;
+  background-size: 12px;
+  background-position: calc(100% - 16px) center;
+}
+
+.formGroupEndDate {
+  @extend .formGroup;
+  width: 242.5px;
+  height: 72px;
+}
+
+.formInputDate {
+  @extend .formInput;
+  width: 242.5px;
+  height: 40px;
+  background: url('../images/time.png') no-repeat right;
+  background-size: 12px;
+  background-position: calc(100% - 16px) center;
+}
+
+.notificationsContainer {
+  position: absolute;
+  width: 442px;
+  height: auto;
+  top: 100px;
+  right: 80px;
+  padding: 16px;
+  gap: 16px;
+  border-radius: 16px;
+  background: #ffffff;
+}
+
+.notificationsHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 410px;
+  height: 40px;
+  gap: 16px;
+}
+
+.notificationsEmptyMessage {
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 24px;
+  color: #74817f;
+}
+
+.notificationsHeaderText {
+  font-size: 23px;
+  font-weight: 700;
+  line-height: 27.6px;
+}
+
+.notificationsHeaderButton {
+  width: 94px;
+  height: 40px;
+  min-height: 40px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+.notificationComponentContainer {
+  width: 410px;
+  height: 40px;
+  gap: 8px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.notificationComponentInner {
+  display: flex;
+  align-items: center;
+  width: 410px;
+  height: 40px;
+  gap: 8px;
+}
+
+.notificationComponentImage {
+  object-fit: cover;
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+}
+
+.notificationComponentTitle {
+  display: flex;
+  flex-direction: column;
+  width: 236px;
+  height: 36px;
+}
+
+.notificationComponentTitleMain {
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 24px;
+  color: #071015;
+}
+
+.notificationComponentTitleDate {
+  font-size: 10px;
+  font-weight: 300;
+  line-height: 12px;
+  color: #74817f;
+}
+
+.notificationStatusTag {
+  display: flex;
+  width: 49px;
+  height: 28px;
+}
+
+.userOptionsContainer {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  width: 204px;
+  height: 129px;
+  top: 100px;
+  right: 110px;
+  padding: 16px;
+  gap: 17px;
+  border-radius: 16px;
+  box-shadow: 0px 0px 0px 0px #0000001a;
+  box-shadow: 0px 4px 8px 0px #0000001a;
+  box-shadow: 0px 15px 15px 0px #00000017;
+  box-shadow: 0px 34px 21px 0px #0000000d;
+  box-shadow: 0px 61px 24px 0px #00000003;
+  box-shadow: 0px 96px 27px 0px #00000000;
+  background-color: #ffffff;
+}
+
+.userOptionsButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 172px;
+  height: 40px;
+  min-height: 40px;
+  padding: 8px 16px 8px 16px;
+  gap: 8px;
+  border-radius: 16px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  cursor: pointer;
+}
+
+.userOptionsButtonIcon {
+  width: 16px;
+  height: 16px;
+  padding: 1.33px 1.52px 1.33px 1.51px;
+}
+
+.userLogoutButton {
+  width: 172px;
+  height: 40px;
+  min-height: 40px;
+  border: 1px solid #272d2d;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  color: #071015;
+  background-color: #ffffff;
+}
+
+.changePasswordContainer {
+  display: flex;
+  flex-direction: column;
+  width: 533px;
+  height: 414px;
+  padding: 16px;
+  gap: 32px;
+  border-radius: 16px;
+  background: #ffffff;
+}
+
+.changePasswordTitle {
+  width: 501px;
+  height: 28px;
+  font-size: 23px;
+  font-weight: 700;
+  line-height: 27.6px;
+}
+
+.changePasswordForm {
+  display: flex;
+  flex-direction: column;
+  width: 501px;
+  height: 322px;
+  gap: 17px;
+}
+
+.changePasswordFormInputs {
+  display: flex;
+  flex-direction: column;
+  width: 501px;
+  height: 250px;
+  gap: 17px;
+}
+
+.changePasswordFormBottomBar {
+  display: flex;
+  justify-content: end;
+  width: 501px;
+  height: 40px;
+  gap: 16px;
+}
+
+.cancelButton {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+.startAuctionButton {
+  @extend .cancelButton;
+  background: #f4ff47;
+}

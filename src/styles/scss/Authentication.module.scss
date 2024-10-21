@@ -1,0 +1,197 @@
+.authPage {
+  display: flex;
+}
+
+.authImage {
+  width: 968px;
+  height: auto;
+}
+
+.innerDiv {
+  width: 100%;
+  max-width: 472px;
+  height: 1024px;
+  gap: 8px;
+}
+
+.rightSide {
+  width: auto;
+  max-width: 464px;
+  height: 1024px;
+  padding: 8px;
+  gap: 8px;
+  display: flex;
+}
+
+.authContainer {
+  width: 448px;
+  padding: 64px 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0px;
+  border-radius: 32px;
+  background: #ffffff;
+}
+
+.logo {
+  width: 64px;
+  height: 64px;
+  padding: 16px 0px 0px 0px;
+  gap: 16px;
+  border-radius: 100px 0px 0px 0px;
+}
+
+.registerFormContainer {
+  width: 384px;
+  height: auto;
+  max-height: 542px;
+  gap: 64px;
+  top: 253px;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.registerFormTitle {
+  width: 384px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-height: 70px;
+}
+
+.registerFormBody {
+  width: 384px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.formInputs {
+  width: 384px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.formGroupTwo {
+  display: flex;
+  gap: 16px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  height: 72px;
+}
+
+.label {
+  font-weight: 300;
+  line-height: 24px;
+}
+
+.formInput {
+  padding: 8px 16px 8px 16px;
+  gap: 8px;
+  border-radius: 16px;
+  border: 1px solid #dde9e6;
+}
+
+.registerButton {
+  height: 40px;
+  background: #f4ff47;
+  font-family: Inter;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  color: #071015;
+}
+
+.loginFormContainer {
+  width: 384px;
+  height: auto;
+  max-height: 398px;
+  gap: 64px;
+  top: 325px;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.loginFormTitle {
+  width: 240px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-height: 70px;
+}
+
+.forgotPasswordText {
+  font-size: 12px;
+  font-weight: 300;
+  line-height: 16px;
+  text-align: right;
+}
+
+.chevronImg {
+  width: 16px;
+  height: 16px;
+  padding: 4px 5.33px 4px 5.73px;
+  gap: 0px;
+  opacity: 0px;
+  rotate: 180 deg;
+}
+
+.backTextDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 300;
+  line-height: 16px;
+  color: #74817f;
+}
+
+.passwordFormContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 384px;
+  height: 800px;
+  gap: 32px;
+}
+
+.passwordFormTitle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 347px;
+  height: 70px;
+  gap: 8px;
+}
+
+.passwordFormSubtitle {
+  font-size: 15px;
+  font-weight: 300;
+}
+
+.passwordFormBody {
+  width: 384px;
+  height: 144px;
+  gap: 32px;
+}
+
+.error {
+  color: white;
+  background-color: red;
+}

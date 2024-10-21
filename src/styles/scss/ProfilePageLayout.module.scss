@@ -1,0 +1,132 @@
+.profilePage {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.title {
+  width: 1, 440px;
+  height: 38px;
+  padding: 0px 32px;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.titleText {
+  margin: 0px;
+}
+
+.dashboardStatistics {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 1, 440px;
+  height: 202px;
+  padding: 0px 32px 0px 32px;
+  gap: 16px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 332px;
+  height: 202px;
+  padding: 16px;
+  gap: 0px;
+  border-radius: 16px;
+}
+
+.cardDarkBg {
+  @extend .card;
+  color: #f4ff47;
+  background: #272d2d;
+}
+
+.cardWhiteBg {
+  color: #071015;
+  @extend .card;
+  background: #ffffff;
+}
+
+.titleFrame {
+  width: 300px;
+  height: 48px;
+}
+
+.cardSubtitle {
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 24px;
+}
+
+.cardSubtitleYellow {
+  @extend .cardSubtitle;
+  color: #f4ff47;
+}
+
+.cardSubtitleGray {
+  @extend .cardSubtitle;
+}
+
+.cardData {
+  font-size: 80px;
+  font-weight: 700;
+  line-height: 80px;
+}
+
+.cardDataGreen {
+  @extend .cardData;
+  color: #adff90;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  width: 1, 440px;
+  height: 632px;
+  gap: 16px;
+}
+
+.tabBar {
+  width: 1, 440px;
+  height: 48px;
+  padding: 0px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tabContainer {
+  display: flex;
+  width: 402px;
+  height: 48px;
+  padding: 4px;
+  gap: 8px;
+  border-radius: 16px;
+  background: var(--Gray-10, #edf4f2);
+}
+
+.tab {
+  width: 126px;
+  height: H40px;
+  padding: 8px 16px;
+  gap: 8px;
+  border-radius: 16px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  text-decoration: none;
+}
+
+.tabDark {
+  @extend .tab;
+  background: #272d2d;
+  color: #ffffff;
+}
+
+.tabGrey {
+  @extend .tab;
+  background: #edf4f2;
+  color: #071015;
+}
