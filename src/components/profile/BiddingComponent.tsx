@@ -90,7 +90,7 @@ const BiddingComponent: FC = () => {
             <div className={styles.imageContainer}>
               {auction.image ? (
                 <img
-                  src={`http://localhost:8080${auction.image}`}
+                  src={`${process.env.REACT_APP_API_URL}${auction.image}`}
                   alt={auction.title}
                   className={styles.image}
                 />

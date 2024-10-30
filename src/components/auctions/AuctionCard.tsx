@@ -32,7 +32,7 @@ const AuctionCard: FC<AuctionCardProps> = ({ auction }) => {
       <div className={styles.imageContainer}>
         {auction.image ? (
           <img
-            src={`http://localhost:8080${auction.image}`}
+            src={`${process.env.REACT_APP_API_URL}${auction.image}`}
             className={styles.image}
             alt="auctionImage"
           />

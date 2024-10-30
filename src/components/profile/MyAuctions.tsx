@@ -165,7 +165,7 @@ const MyAuctions: FC = () => {
             >
               {auction.image ? (
                 <img
-                  src={`http://localhost:8080${auction.image}`}
+                  src={`${process.env.REACT_APP_API_URL}${auction.image}`}
                   alt={auction.title}
                   className={`${auction.is_active ? styles.image : styles.imageFull}`}
                 />
